@@ -1,0 +1,112 @@
+
+/* ============ REUSABLE COMPONENTS ============ */
+
+/* MARGIN/PADDING */
+  .margin-auto {
+    margin: auto;
+  }
+  
+  /* ALIGNMENT */
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+
+  .text-left {
+    text-align: left;
+  }  
+
+  .pull-right {
+    float: right !important;
+  }
+  
+  .pull-left {
+    float: left !important;
+  }
+
+  .inline-block {
+    display: inline-block;
+  }
+  
+  /* COLORS */
+  .white {
+    color: #fff !important;
+  }
+  
+  .dark {
+    color: #343a40 !important;
+  }
+
+  .background-light {
+    background: lightgrey !important;
+  }
+
+  /* FONT/TEXT */
+  .font-400 {
+    font-weight: 400;
+  }
+
+  .font-600 {
+    font-weight: 600;
+  }
+
+  .font-size-1rem {
+    font-size: 1rem !important;
+  }
+
+  .bolder {
+    font-weight: bolder;
+  }
+
+  .uppercase {
+    text-transform: uppercase;
+  }
+  
+  /* HEIGHT/WIDTH */
+  .height-100 {
+    height: 100%;
+  }
+  
+  .width-100 {
+    width: 100%;
+  }
+  
+  /* FORMS */
+  .label-spacing {
+    top: -20px !important;
+  }
+
+  .inline-list {
+    margin: 0;
+    padding: 0;
+  }
+  .inline-list li {
+    display: inline-block;
+    
+  }
+  
+  /* DESKS */
+  .flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+
+  }
+
+  .flex-desk img {
+    max-width: 100px;
+    width: 100%;
+    height: auto;
+    border-radius: 50%;    
+  }
+
+  .border-stn {
+    border-radius: 50%; 
+    border: 2px solid;
+  }
+  
+ 
