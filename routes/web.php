@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
-Route::get('/home',[HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth']], function() {
+    // HOME PAGE
+    Route::get('/home',[HomeController::class, 'index'])->name('home');
+
+    // PROFILE
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+});
+
 
 require __DIR__.'/auth.php';
