@@ -34,98 +34,22 @@
 </head>
 
 <body class="dark-edition">
-  <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="black" data-image="/img/desk.jpg">
-      <div class="logo"><a href="javascript:void(0)" class="simple-text logo-normal"> 
-          <i class="material-icons">desktop_windows</i>
-          Office Bookings
-        </a></div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">
-              <i class="material-icons">home</i>
-              <p>Home</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="#">
-              <i class="material-icons">apartment</i>
-              <p>Properties</p>
-            </a>
-          </li>
-          <li>
-            
-          </li>
-         
-        </ul>
-      </div>
-    </div>
-    <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            {{-- <a class="navbar-brand" href="javascript:void(0)"></a> --}}
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end">
-            <form class="navbar-form">
-              <div class="input-group no-border">
-                <input type="text" value="" class="form-control" placeholder="Search...">
-                <button type="submit" class="btn btn-default btn-round btn-just-icon">
-                  <i class="material-icons">search</i>
-                  <div class="ripple-container"></div>
-                </button>
-              </div>
-            </form>
-            <ul class="navbar-nav">
-              <li class="nav-item dropdown">
-                <a class="nav-link" href="javscript:void(0)" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="material-icons">notifications</i>
-                  <span class="notification">1</span>
-                  <p class="d-lg-none d-md-block">
-                    Some Actions
-                  </p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink2">
-                  <a class="dropdown-item" href="javascript:void(0)">Mike John responded to your email</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="material-icons">person</i>     
-                  <p class="d-lg-none d-md-block">
-                    Your Account
-                  </p> 
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="/profile">Account</a>
-                  <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" title="Logout"> 
-                    <span class="admin-nav-bg">{{ __('Logout') }}</span> <i class="fas fa-sign-in-alt"></i>
-                </a>         
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> 
-                    @csrf 
-                </form>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <!-- End Navbar -->
+  <div class="wrapper">
+    {{-- SIDEBAR --}}
+    {{-- @if (isset($options['has-sidebar']) && $options['has-sidebar']) --}}
+      @include('includes.sidebar')  
+    {{-- @endif --}}
 
-      {{-- Start: Content --}}
+    <div class="main-panel">
+      {{-- NAVBAR --}}
+      @include('includes.navbar') 
+
+      {{-- CONTENT --}}
       <div class="content">
           @yield('content')
       </div>
 
-      {{-- Start: footer --}}
+      {{-- FOOTER --}}
       <footer class="footer">
         <div class="container-fluid">
           <nav class="float-left">
@@ -137,16 +61,17 @@
           </div>
         </div>
       </footer>
+
       <script>
         const x = new Date().getFullYear();
         let date = document.getElementById('date');
         date.innerHTML = '&copy; ' + x + date.innerHTML;
       </script>
+
     </div>
   </div>
 
   <!--   Core JS Files   -->
- 
   <script src="/js/core/popper.min.js"></script>
   <script src="/js/core/bootstrap-material-design.min.js"></script>
   {{-- <script src="https://unpkg.com/default-passive-events"></script> --}}
