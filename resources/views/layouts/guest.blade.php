@@ -34,8 +34,11 @@
 </head>
 
 <body class="dark-edition">
-  <div class="wrapper ">
-    <div class="main-panel">
+    {{-- NAVBAR --}}
+    @include('includes.welcomeNavbar')
+
+    <div class="wrapper">
+      <div class="main">
         {{-- CONTENT --}}
         <div class="content">
             @yield('content')
@@ -53,17 +56,15 @@
             </div>
           </div>
         </footer>
-
-        <script>
-          const x = new Date().getFullYear();
-          let date = document.getElementById('date');
-          date.innerHTML = '&copy; ' + x + date.innerHTML;
-        </script>
       </div>
-  </div>
-
+    </div>
+    
+  <script>
+    const x = new Date().getFullYear();
+    let date = document.getElementById('date');
+    date.innerHTML = '&copy; ' + x + date.innerHTML;
+  </script>
   <!--   Core JS Files   -->
- 
   <script src="/js/core/popper.min.js"></script>
   <script src="/js/core/bootstrap-material-design.min.js"></script>
   {{-- <script src="https://unpkg.com/default-passive-events"></script> --}}
