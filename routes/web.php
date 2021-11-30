@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\ProfileController;
+use App\Http\Controllers\Web\OrganisationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,10 +22,13 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth']], function() {
     // HOME PAGE
-    Route::get('/home',[HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     // PROFILE
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+    // ORGANISATION
+    Route::resource('/organisation', OrganisationController::class);
 });
 
 

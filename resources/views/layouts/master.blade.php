@@ -86,6 +86,9 @@
   <script src="/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="/js/material-dashboard.js?v=2.1.0"></script>
+  
+  @yield('scripts')
+
   <script>
     $(document).ready(function() {
       $().ready(function() {
