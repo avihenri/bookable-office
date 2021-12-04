@@ -3,6 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        <div class="col-md-12">
+            @include('includes.session-errors')
+        </div>
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header white">{{ __('Register') }}</div>
@@ -12,10 +15,10 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label">{{ __('First Name*') }}</label>
+                            <label for="first_name" class="col-md-4 col-form-label">{{ __('First Name*') }}</label>
                             <div class="col-md-12">
-                                <input id="name" type="text" class="form-control mt-2 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                @error('name')
+                                <input id="name" type="text" class="form-control mt-2 @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+                                @error('first_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -24,10 +27,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="lastName" class="col-md-4 col-form-label">{{ __('Last Name*') }}</label>
+                            <label for="last_name" class="col-md-4 col-form-label">{{ __('Last Name*') }}</label>
                             <div class="col-md-12">
-                                <input id="lastName" type="text" class="form-control mt-2 @error('lastName') is-invalid @enderror" name="lastName" value="{{ old('lastName') }}" required autocomplete="lastName" autofocus>
-                                @error('lastName')
+                                <input id="lastName" type="text" class="form-control mt-2 @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
+                                @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

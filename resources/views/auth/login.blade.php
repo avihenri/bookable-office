@@ -3,6 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        <div class="col-md-12">
+            @include('includes.session-errors')
+        </div>
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header white">{{ __('Login') }}</div>
@@ -11,7 +14,7 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        {{-- <div class="form-group row">
+                        <div class="form-group row">
                             <label for="username" class="col-md-12 col-form-label label-spacing">{{ __('Username') }}</label>
                             <div class="col-md-12">
                                 <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
@@ -21,9 +24,9 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div> --}}
+                        </div>
 
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="email" class="col-md-12 col-form-label label-spacing">{{ __('Email') }}</label>
                             <div class="col-md-12">
                                 <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -33,7 +36,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group row">
                             <label for="password" class="col-md-12 col-form-label label-spacing">{{ __('Password') }}</label>

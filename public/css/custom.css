@@ -1,9 +1,9 @@
 
 /* ============ REUSABLE COMPONENTS ============ */
-input, textarea {
+/* input, textarea {
   font-size: 180% !important;
   padding-bottom: 25px !important;
-}
+} */
 /* MARGIN/PADDING */
   .margin-auto {
     margin: auto;
