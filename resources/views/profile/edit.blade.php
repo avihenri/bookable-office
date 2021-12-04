@@ -4,6 +4,31 @@
 <div class="content">
     <div class="container-fluid">
       <div class="row">
+        <div class="col-md-12">
+          @include('includes.session-errors')
+          @include('includes.session-success')
+      </div>
+      <div class="col-md-4">
+        <div class="card card-profile">
+          <div class="card-avatar">
+            <a href="#pablo">
+              {{-- @if(!$user['imgPath']) --}}
+                  <img src="/img/plusIcon.png" width="150" >
+              {{-- @else 
+              <img class="img" src="{{ $user['imgPath']   }} " /> 
+              @endif --}}
+            </a>
+          </div>
+          <div class="card-body">
+            <h6 class="card-category">{{ $user['job_desc'] ?? ''  }}</h6>
+            <h4 class="card-title">{{ $user['first_name'] }}  {{ $user['last_name'] }}</h4>
+            <p class="card-description">
+              {{ $user['bio'] ?? 'Add some info to your bio..'  }}
+            </p>
+            {{-- <a href="#pablo" class="btn btn-primary btn-round">Follow</a> --}}
+          </div>
+        </div>
+      </div>
         <div class="col-md-8">
           <div class="card">
             <div class="card-header card-header-primary">
@@ -11,42 +36,49 @@
               <p class="card-category">Complete your profile</p>
             </div>
             <div class="card-body">
-              <form>
+              <form method="POST" action="/profile/{{ $user['id'] }}">
+                @csrf
+                @method('put')
+
                 <div class="row">
-                  <div class="col-md-5">
+                  <div class="col-md-12 mb-3">
                     <div class="form-group">
-                      <label class="bmd-label-floating">Company (disabled)</label>
-                    <input type="text" class="form-control" value="{{ $user['company'] ?? ''  }}" disabled>
+                      <label class="bmd-label-floating">Organisation (disabled)</label>
+                    <input type="text" class="form-control" value="{{ $user['organisation'] ?? ''  }}" disabled>
                     </div>
                   </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label class="bmd-label-floating">Username</label>
-                      <input type="text" class="form-control" value="{{ $user['username'] ?? ''  }}">
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label class="bmd-label-floating">Email address</label>
-                      <input type="email" class="form-control" value="{{ $user['email'] ?? ''  }}">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="bmd-label-floating">First Name</label>
-                      <input type="text" class="form-control" value="{{ $user['name'] ?? ''  }}">
+                      <input type="text" class="form-control" name="first_name" value="{{ $user['first_name'] ?? ''  }}">
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="bmd-label-floating">Last Name</label>
-                      <input type="text" class="form-control" value="{{ $user['lastName'] ?? ''  }}">
+                      <input type="text" class="form-control" name="last_name" value="{{ $user['last_name'] ?? ''  }}">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Username</label>
+                      <input type="text" class="form-control" name="username" value="{{ $user['username'] ?? ''  }}">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Email address</label>
+                      <input type="email" class="form-control" name="email" value="{{ $user['email'] ?? ''  }}">
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Job Description</label>
+                      <input type="text" class="form-control" name="job_desc" value="{{ $user['job_desc'] ?? ''  }}">
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                       <label class="bmd-label-floating">Address</label>
@@ -73,42 +105,21 @@
                       <input type="text" class="form-control" {{ $user['postcode'] ?? ''  }}>
                     </div>
                   </div>
-                </div>
+                </div> --}}
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>About Me</label>
                       <div class="form-group">
                         <label class="bmd-label-floating"></label>
-                        <textarea class="form-control" rows="5">{{ $user['bio'] ?? 'Add a bio about yourself'  }}</textarea>
+                        <textarea class="form-control" rows="5" name="bio">{{ $user['bio'] ?? 'Add a bio about yourself'  }}</textarea>
                       </div>
                     </div>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                <button type="submit" class="btn btn-info pull-right font-600 font-size-1rem">Update</button>
                 <div class="clearfix"></div>
               </form>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card card-profile">
-            <div class="card-avatar">
-              <a href="#pablo">
-                @if(!$user['imgPath'])
-                    <img src="/img/plusIcon.png" width="150" >
-                @else 
-                <img class="img" src="{{ $user['imgPath']   }}" />
-                @endif
-              </a>
-            </div>
-            <div class="card-body">
-              <h6 class="card-category">{{ $user['job_desc'] ?? ''  }}</h6>
-              <h4 class="card-title">{{ $user['name'] }}  {{ $user['lastName'] }}</h4>
-              <p class="card-description">
-                {{ $user['bio'] ?? 'Add some info to your bio..'  }}
-              </p>
-              {{-- <a href="#pablo" class="btn btn-primary btn-round">Follow</a> --}}
             </div>
           </div>
         </div>

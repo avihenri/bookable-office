@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $with = ['organisation'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,6 +26,8 @@ class User extends Authenticatable
         'email',
         'password',
         'organisation_id',
+        'job_desc',
+        'bio'
     ];
 
     /**

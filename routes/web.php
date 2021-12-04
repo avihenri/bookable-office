@@ -25,7 +25,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     // PROFILE
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
+    Route::put('/profile/{id}', [ProfileController::class, 'update']);
 
     // ORGANISATION
     Route::resource('/organisation', OrganisationController::class);

@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Resources\Users;
-use App\Models\User;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,19 +17,38 @@ class ProfileController extends Controller
         //
     }
 
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        $user = new Users(auth()->user());
-
-        return view('profile.edit', [
-            'user' => $user->resolve(),
-        ]);
+        //
     }
 
     /**
@@ -43,12 +60,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::where('id', $id)->first();
-        
-        // update user
-        $user->update($request->all());
-
-        return redirect()->back()->with('success', 'Update successful');
+        //
     }
 
     /**
