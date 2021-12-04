@@ -31,6 +31,10 @@
   <link href="/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <link href="/css/custom.css" rel="stylesheet" />
   <script src="/js/core/jquery.min.js"></script>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>
 </head>
 
 <body class="dark-edition">
@@ -95,6 +99,13 @@
         // ADD RED * TO REQUIRED SELECT/INPUT FIELDS
         $('select[required], input[required], textarea[required]').parent().find('label').append('<span class="red">*</span>');
         $sidebar = $('.sidebar');
+
+        // fade out alerts
+        setTimeout(function(){
+            $('.fade-out-alert').addClass('animate__animated animate__backOutUp').queue(function(){
+                $('.fade-out-alert').remove();
+            });
+        }, 2000);
 
         $sidebar_img_container = $sidebar.find('.sidebar-background');
 
@@ -253,13 +264,6 @@
       });
     });
   </script>
-  {{-- <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      md.initDashboardPageCharts();
-
-    });
-  </script> --}}
 </body>
 
 </html>
