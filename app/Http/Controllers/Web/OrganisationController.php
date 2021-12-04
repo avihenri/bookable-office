@@ -46,7 +46,7 @@ class OrganisationController extends Controller
         );
 
         $parameters = $request->toArray();
-        $parameters['created_by'] = Auth::user()->id;
+        $parameters['created_by'] = $user->id;
 
         // create organsisation
         $organisation = Organisation::create($parameters);
@@ -88,9 +88,15 @@ class OrganisationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Organisation $organisation)
     {
-        //
+        $parameters = $request->toArray();
+
+        // update organsisation
+        $organisation->fill($parameters);
+        $organisation->save();
+
+        return redirect()->back()->with('success', 'Update successful');
     }
 
     /**

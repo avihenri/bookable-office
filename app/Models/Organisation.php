@@ -9,6 +9,6 @@ class Organisation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'bio', 'logoPath'];
+    protected $fillable = ['name', 'bio', 'logoPath', 'created_by'];
 
 }

@@ -1,9 +1,16 @@
 
 /* ============ REUSABLE COMPONENTS ============ */
-
+input, textarea {
+  font-size: 180% !important;
+  padding-bottom: 25px !important;
+}
 /* MARGIN/PADDING */
   .margin-auto {
     margin: auto;
+  }
+
+  .pt-2 {
+    padding-top: 20px !important;
   }
   
   /* ALIGNMENT */
@@ -28,7 +35,11 @@
   }
 
   .inline-block {
-    display: inline-block;
+    display: inline-block !important;
+  }
+
+  .display-none {
+    display: none;
   }
   
   /* COLORS */
@@ -60,6 +71,10 @@
 
   .font-size-1rem {
     font-size: 1rem !important;
+  }
+
+  .size-120-percent {
+    font-size: 120% !important;
   }
 
   .bolder {

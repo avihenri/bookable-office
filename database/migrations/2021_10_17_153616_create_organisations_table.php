@@ -16,7 +16,7 @@ class CreateOrganisationsTable extends Migration
         Schema::create('organisations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 255)->default('');
-            $table->string('bio', 255)->default('');
+            $table->text('bio')->default('');
             $table->string('logoPath', 255)->default('');
             $table->bigInteger('created_by')->nullable();
             $table->timestamps();
