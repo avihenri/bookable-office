@@ -61,6 +61,9 @@
   }
 
   /* FONT/TEXT */
+  p {
+    font-size: 120% !important;
+  }
   .font-400 {
     font-weight: 400;
   }

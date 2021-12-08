@@ -27,7 +27,8 @@ class User extends Authenticatable
         'password',
         'organisation_id',
         'job_desc',
-        'bio'
+        'bio',
+        'image_path'
     ];
 
     /**

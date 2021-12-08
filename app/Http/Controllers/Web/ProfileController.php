@@ -41,9 +41,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $userId)
     {
-        $user = User::where('id', $id)->first();
+        $user = User::where('id', $userId)->first();
         
         // update user
         $user->update($request->all());
@@ -52,13 +52,27 @@ class ProfileController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Upload profile image.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function uploadProfileImage(Request $request, $userId)
     {
-        //
+        $user = User::where('id', $userId)->first();
+        $request->validate([
+            'image_path' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:3048',
+        ]);
+        
+        // File details & save
+        $file = $request['image_path'];            
+        $fileName = $file->getClientOriginalName();        
+        $file->storeAs('public/profile-image', $fileName);
+
+        // save image path on user
+        $user->image_path = "/storage/profile-image/" . $fileName;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Image added successfully');
     }
 }

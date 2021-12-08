@@ -23,7 +23,8 @@ class Users extends JsonResource
             'organisation_id' => $this->organisation_id,
             'organisation' => $this->organisation->name,
             'job_desc' => $this->job_desc,
-            'bio' => $this->bio
+            'bio' => $this->bio,
+            'imagePath' => $this->image_path,
         ];
     }
 }

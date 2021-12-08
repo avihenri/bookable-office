@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth']], function() {
     // PROFILE
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
     Route::put('/profile/{id}', [ProfileController::class, 'update']);
+    Route::post('/profile/{id}/upload-image', [ProfileController::class, 'uploadProfileImage']);
 
     // ORGANISATION
     Route::resource('/organisation', OrganisationController::class);

@@ -11,12 +11,8 @@
       <div class="col-md-4">
         <div class="card card-profile">
           <div class="card-avatar">
-            <a href="#pablo">
-              {{-- @if(!$user['imgPath']) --}}
-                  <img src="/img/plusIcon.png" width="150" >
-              {{-- @else 
-              <img class="img" src="{{ $user['imgPath']   }} " /> 
-              @endif --}}
+            <a href="#" id="add-image" data-toggle="modal" data-target="#add-avatar-modal">
+              <img class="img" src="{{ !$user['imagePath'] ? '/img/plusIcon.png' : $user['imagePath'] }}" width="150" /> 
             </a>
           </div>
           <div class="card-body">
@@ -25,7 +21,6 @@
             <p class="card-description">
               {{ $user['bio'] ?? 'Add some info to your bio..'  }}
             </p>
-            {{-- <a href="#pablo" class="btn btn-primary btn-round">Follow</a> --}}
           </div>
         </div>
       </div>
@@ -127,4 +122,38 @@
     </div>
   </div>
 
+  {{-- UPLOAD NEW PROFILE IMAGE MODAL --}}
+  <div class="modal" id="add-avatar-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form method="POST" action="/profile/{{ $user['id'] }}/upload-image" id="upload-image-form" enctype="multipart/form-data">
+          @csrf
+          <div class="modal-header">
+            <h5 class="modal-title">Upload New Profile Picture</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <input type="file" id="myFile" name="image_path">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary font-600 font-size-1rem" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-info font-600 font-size-1rem" id="upload-image">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // submit upload image
+            $('#upload-image').on('click', () => {
+                $('#upload-image-form').submit();
+            });
+        });
+    </script>
 @endsection
