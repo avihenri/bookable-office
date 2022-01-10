@@ -112,9 +112,55 @@
                     </div>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-info pull-right font-600 font-size-1rem">Update</button>
+                @if (Route::has('password.request'))
+                <div class="col-md-12">
+                  <a class="btn btn-primary" id="reset-password" href="javascript:void(0)">
+                    {{ __('Reset your password') }}
+                  </a>
+                  <button type="submit" class="btn btn-info pull-right font-600 font-size-1rem">Update</button>
+                </div>
+              @endif
+
                 <div class="clearfix"></div>
               </form>
+            </div>
+            <div class="card-footer row">
+              <div id="password-panel" class="col-md-12" style="display:none;">
+                  <div class="">
+                    <form method="POST" action="{{ route('profile.password-reset', ['id' => $user['id']]) }}" id="password-reset-form">
+                      @csrf
+
+                          <!-- Password -->
+                          <div class="form-group row">
+                              <label for="password" class="col-md-4 col-form-label">{{ __('Password*') }}</label>
+                              <div class="col-md-12">
+                                  <input id="password" type="password" class="form-control mt-2 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                  @error('password')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
+                              </div>
+                          </div>
+          
+                          <!-- Confirm Password -->
+                          <div class="form-group row">
+                              <label for="password-confirm" class="col-md-4 col-form-label">{{ __('Confirm Password*') }}</label>
+                              <div class="col-md-12">
+                                  <input id="password-confirm" type="password" class="form-control mt-2" name="password_confirmation" required autocomplete="new-password">                            </div>
+                          </div>
+          
+                          <div class="form-group row mb-0">
+                              <div class="col-md-12 text-center">
+                                  <button id="reset-password-button" class="btn btn-primary">
+                                      {{ __('Reset') }}
+                                  </button>
+                              </div>
+                          </div>
+                    </form>
+                  </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -154,6 +200,35 @@
             $('#upload-image').on('click', () => {
                 $('#upload-image-form').submit();
             });
+
+            // reset password panel
+            $('#reset-password').on('click', function() {
+                $('#password-panel').toggle();
+            });
+
+            // CHECK PASSWORDS ARE THE SAME FRONT-END CHECK
+            let password = document.getElementById("password");
+            let confirmPassword = document.getElementById("password-confirm");
+
+            function validatePassword() {
+              if (password.value !== confirmPassword.value) {
+                confirmPassword.setCustomValidity("Passwords Don't Match");
+                return false;
+              } else {
+                confirmPassword.setCustomValidity('');
+                return true;
+              }
+            }
+
+            $('#reset-password-button').on('click', () => {
+              // TODO: add extra validation
+              let passwordsValid = validatePassword();
+              if (passwordsValid) {
+                $('#password-reset-form').submit();
+              }
+            });
+
+
         });
     </script>
 @endsection

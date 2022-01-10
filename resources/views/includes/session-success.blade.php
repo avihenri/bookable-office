@@ -1,5 +1,11 @@
 @if (session('success'))
     <div class="alert alert-success fade-out-alert" role="alert">
-        {{ session('success') }}
+        {{ session('success')}}
     </div>
-@endif 
+@endif
+
+@if (session('status'))
+    <div class="alert alert-success fade-out-alert" role="alert">
+        {{ session('status')}}
+    </div>
+@endif

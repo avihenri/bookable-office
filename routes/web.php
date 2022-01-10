@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
     Route::put('/profile/{id}', [ProfileController::class, 'update']);
     Route::post('/profile/{id}/upload-image', [ProfileController::class, 'uploadProfileImage']);
+    Route::post('/profile/{id}/password-reset', [ProfileController::class, 'resetPasswordWithoutToken'])->name('profile.password-reset');
 
     // ORGANISATION
     Route::resource('/organisation', OrganisationController::class);

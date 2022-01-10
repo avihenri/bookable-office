@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\Users;
 use App\Models\User;
+
 
 class ProfileController extends Controller
 {
@@ -74,5 +76,13 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Image added successfully');
+    }
+
+    public function resetPasswordWithoutToken(Request $request) {
+        $user = Auth::user();
+        $user->password = \Hash::make($request['password']);
+        $user->save(); 
+
+        return redirect()->back()->with(['success' => 'Password reset successfully.']);
     }
 }
