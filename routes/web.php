@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\ProfileController;
 use App\Http\Controllers\Web\OrganisationController;
+use App\Http\Controllers\Web\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +22,10 @@ Route::get('/', function () {
 
 
 Route::group(['middleware' => ['auth']], function() {
+    // USER/ROLE 
+    Route::resource('roles', 'RoleController');
+    Route::resource('users', UserController::class);
+
     // HOME PAGE
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 

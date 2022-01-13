@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -12,9 +18,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $users = User::orderBy('first_name','ASC')->get();
+        return view('admin.users.index', compact('users'));
     }
 
 
@@ -37,7 +44,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.users.show', compact('user'));
     }
 
     /**

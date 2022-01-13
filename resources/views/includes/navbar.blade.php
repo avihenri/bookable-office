@@ -37,11 +37,11 @@
             <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="material-icons">person</i>     
               <p class="d-lg-none d-md-block">
-                Your Account
+                Profile
               </p> 
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/profile">Account</a>
+              <a class="dropdown-item" href="/profile">Profile</a>
               <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" title="Logout"> 
                 <span class="admin-nav-bg">{{ __('Logout') }}</span> <i class="fas fa-sign-in-alt"></i>
             </a>         

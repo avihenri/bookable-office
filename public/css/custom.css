@@ -132,9 +132,24 @@
     border: 2px solid;
   }
 
-#welcome-nav {
-  padding: 10px 20px 10px 0;
-}
+
+  .nav-divider {
+    margin-top: 50px; 
+    padding: 10px; 
+    background: #029eb1;
+    border-radius: 3px;
+  }
+
+  .nav-divider-heading {
+    text-align: center; 
+    color: #fff;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  #welcome-nav {
+    padding: 10px 20px 10px 0;
+  }
 
 .main .content {
   margin-top: 70px;

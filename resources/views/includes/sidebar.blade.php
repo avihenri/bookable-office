@@ -5,6 +5,7 @@
         Bookable Office
       </a></div>
     <div class="sidebar-wrapper">
+
       <ul class="nav">
         <li class="nav-item active">
           <a class="nav-link" href="/home">
@@ -18,6 +19,18 @@
             <p>Properties</p>
           </a>
         </li> --}}
+
+        <div class="nav-divider">
+          <h5 class="nav-divider-heading">  ADMIN</h5>
+        </div>
+          <li class="nav-item">
+            <a class="nav-link" href="/users">
+              <i class="material-icons">group</i>
+              <p>Users</p>
+            </a>
+          </li>
       </ul>
+
+
     </div>
   </div>
