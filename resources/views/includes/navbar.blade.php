@@ -35,21 +35,28 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="material-icons">person</i>     
+              <i class="material-icons">person</i>
               <p class="d-lg-none d-md-block">
                 Profile
-              </p> 
+              </p>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="/profile">Profile</a>
-              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" title="Logout"> 
+              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" title="Logout">
                 <span class="admin-nav-bg">{{ __('Logout') }}</span> <i class="fas fa-sign-in-alt"></i>
-            </a>         
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> 
-                @csrf 
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
             </form>
+            @if (auth()->user())
+            <div class="divider"></div>
+            <div class="text-center mt-1">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</div>
+
+        @endif
             </div>
+
           </li>
+
         </ul>
       </div>
     </div>

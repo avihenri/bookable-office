@@ -18,6 +18,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:view-list|can-create|can-edit|can-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:can-create', ['only' => ['create','store']]);
+         $this->middleware('permission:can-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:can-delete', ['only' => ['destroy']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         $users = User::orderBy('first_name','ASC')->get();
@@ -33,7 +46,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // use register
     }
 
     /**
@@ -56,7 +69,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $roles = Role::pluck('name', 'id')->all();
+        $userRoles = $user->roles->pluck('name','name')->all();
+
+        return view('admin.users.edit', compact('user','roles','userRoles'));
     }
 
     /**
@@ -68,7 +85,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $user->roles()->sync($request->input('roles'));
+
+        return redirect()->back()->with('success', 'Updated successfully');
     }
 
     /**

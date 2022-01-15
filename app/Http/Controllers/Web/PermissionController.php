@@ -6,9 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
-class RoleController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,8 +29,8 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        $roles = Role::orderBy('name','asc')->paginate(5);
-        return view('admin.roles.index',compact('roles'))
+        $permissions = Permission::orderBy('name','asc')->paginate(5);
+        return view('admin.permissions.index',compact('permissions'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -42,8 +41,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permission = Permission::get();
-        return view('admin.roles.create',compact('permission'));
+        return view('admin.permissions.create');
     }
 
     /**
@@ -55,15 +53,14 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:roles,name',
-            'permission' => 'required',
+            'name' => 'required|unique:permissions,name',
         ]);
 
-        $role = Role::create(['name' => $request->input('name')]);
-        $role->syncPermissions($request->input('permission'));
+        Permission::create(['name' => $request->input('name')]);
 
-        return redirect()->route('roles.index')->with('success','Created successfully');
+        return redirect()->route('permissions.index')->with('success', 'Created successfully');
     }
+
     /**
      * Display the specified resource.
      *
@@ -72,12 +69,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        $role = Role::find($id);
-        $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
-            ->where("role_has_permissions.role_id",$id)
-            ->get();
-
-        return view('admin.roles.show',compact('role','rolePermissions'));
+        //
     }
 
     /**
@@ -88,13 +80,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::find($id);
-        $permission = Permission::pluck('name', 'id')->all();
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
-            ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
-            ->all();
+        $permission = Permission::find($id);
 
-        return view('admin.roles.edit', compact('role','permission','rolePermissions'));
+        return view('admin.permissions.edit', compact('permission'));
     }
 
     /**
@@ -108,17 +96,15 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'permission' => 'required',
         ]);
 
-        $role = Role::find($id);
-        $role->name = $request->input('name');
-        $role->save();
-
-        $role->syncPermissions($request->input('permission'));
+        $permission = Permission::find($id);
+        $permission->name = $request->input('name');
+        $permission->save();
 
         return redirect()->back()->with('success', 'Updated successfully');
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -127,13 +113,14 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $model_has_roles = DB::table("model_has_roles")->pluck('role_id')->all();
+        $role_has_permissions = DB::table("role_has_permissions")->pluck('permission_id')->all();
 
-        if (in_array($id, $model_has_roles)) {
-            return redirect()->back()->withErrors(['error' => 'Unable to delete. Role being used.']);
+        if (in_array($id, $role_has_permissions)) {
+            return redirect()->back()->withErrors(['error' => 'Unable to delete. Permission attached to a role.']);
         }
 
-        DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('roles.index')->with('success', 'Deleted successfully');
+        DB::table("permissions")->where('id',$id)->delete();
+
+        return redirect()->route('permissions.index')->with('success', 'Deleted successfully');
     }
 }

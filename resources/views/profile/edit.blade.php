@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Home | Office Bookings')
+@section('title', 'Profile | Bookable Office')
 @section('content')
 <div class="content">
     <div class="container-fluid">
@@ -12,7 +12,7 @@
         <div class="card card-profile">
           <div class="card-avatar">
             <a href="#" id="add-image" data-toggle="modal" data-target="#add-avatar-modal">
-              <img class="img" src="{{ !$user['imagePath'] ? '/img/plusIcon.png' : $user['imagePath'] }}" width="150" /> 
+              <img class="img" src="{{ !$user['imagePath'] ? '/img/plusIcon.png' : $user['imagePath'] }}" width="150" />
             </a>
           </div>
           <div class="card-body">
@@ -142,14 +142,14 @@
                                   @enderror
                               </div>
                           </div>
-          
+
                           <!-- Confirm Password -->
                           <div class="form-group row">
                               <label for="password-confirm" class="col-md-4 col-form-label">{{ __('Confirm Password*') }}</label>
                               <div class="col-md-12">
                                   <input id="password-confirm" type="password" class="form-control mt-2" name="password_confirmation" required autocomplete="new-password">                            </div>
                           </div>
-          
+
                           <div class="form-group row mb-0">
                               <div class="col-md-12 text-center">
                                   <button id="reset-password-button" class="btn btn-primary">

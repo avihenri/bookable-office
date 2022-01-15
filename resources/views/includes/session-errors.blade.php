@@ -7,3 +7,9 @@
         </ul>
     </div>
 @endif
+
+@if (!$errors->any() && session('error'))
+    <div class="alert alert-danger m-3" role="alert">
+        {{ session('error')}}
+    </div>
+@endif
