@@ -18,7 +18,7 @@ class AddUsernameOrgIdJobDescToUsersTable extends Migration
             $table->string('last_name')->after('first_name');
             $table->string('username')->after('last_name')->unique();
             $table->bigInteger('organisation_id')->after('email')->nullable();
-            $table->string('job_desc')->after('organisation_id')->default('');
+            $table->string('job_desc')->after('organisation_id')->nullable();
         });
     }
 

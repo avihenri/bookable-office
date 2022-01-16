@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -37,6 +39,20 @@ class UserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $roles = Role::pluck('name', 'id')->all();
+        $adminUser = new Users(auth()->user());
+        $adminUser = $adminUser->resolve();
+
+        return view('admin.users.create', compact('roles', 'adminUser'));
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -46,7 +62,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // use register
+        $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'organisation_id' => auth()->user()->organisation_id,
+        ]);
+
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('users.index')->with('success', 'Created successfully');
+
     }
 
     /**
@@ -87,6 +123,17 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
+        $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users,username,'.$user->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
+        ]);
+
+        // update user
+        $user->update($request->all());
+
+        // assign roles
         $user->roles()->sync($request->input('roles'));
 
         return redirect()->back()->with('success', 'Updated successfully');
@@ -100,6 +147,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return redirect()->route('users.index')->with('success','Deleted successfully');
     }
 }

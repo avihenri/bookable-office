@@ -46,7 +46,14 @@ class ProfileController extends Controller
     public function update(Request $request, $userId)
     {
         $user = User::where('id', $userId)->first();
-        
+
+        $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users,username,'.$user->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
+        ]);
+
         // update user
         $user->update($request->all());
 
@@ -65,10 +72,10 @@ class ProfileController extends Controller
         $request->validate([
             'image_path' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:3048',
         ]);
-        
+
         // File details & save
-        $file = $request['image_path'];            
-        $fileName = $file->getClientOriginalName();        
+        $file = $request['image_path'];
+        $fileName = $file->getClientOriginalName();
         $file->storeAs('public/profile-image', $fileName);
 
         // save image path on user
@@ -81,7 +88,7 @@ class ProfileController extends Controller
     public function resetPasswordWithoutToken(Request $request) {
         $user = Auth::user();
         $user->password = \Hash::make($request['password']);
-        $user->save(); 
+        $user->save();
 
         return redirect()->back()->with(['success' => 'Password reset successfully.']);
     }

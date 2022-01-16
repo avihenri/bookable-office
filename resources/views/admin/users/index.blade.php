@@ -11,7 +11,12 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title uppercase">User Management</h4>
+                            <div class="pull-left">
+                                <h4 class="card-title uppercase">User Management</h4>
+                            </div>
+                            <div class="pull-right">
+                                <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem" href="{{ route('users.create') }}">Add User</a>
+                            </div>
                         </div>
                         <div class="card-body table-responsive">
                             <table class="table table-hover font-size-1rem">
@@ -35,7 +40,8 @@
                                                     @endforeach
                                                 @endif
                                             </td>
-                                            <td class="pull-right"><a class="btn btn-info btn-round btn-sm font-600 font-size-1rem" href="{{ route('users.edit',$user->id) }}">Edit</a>
+                                            <td class="pull-right">
+                                                    <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem" href="{{ route('users.edit',$user->id) }}">Edit</a>
                                                     {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
                                                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-round btn-sm font-600 font-size-1rem']) !!}
                                                     {!! Form::close() !!}

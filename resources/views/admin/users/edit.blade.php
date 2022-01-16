@@ -12,7 +12,7 @@
                     <div class="card">
                         <div class="card-header card-header-primary">
                            <div class="pull-left">
-                                <h4 class="card-title uppercase">Edit User Roles</h4>
+                                <h4 class="card-title uppercase">Edit User</h4>
                            </div>
                             <div class="pull-right">
                                 <a class="btn btn-secondary btn-round btn-sm font-600 font-size-1rem" href="{{ route('users.index') }}">Back</a>
@@ -27,18 +27,37 @@
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">First Name</label>
-                                            <input type="text" class="form-control" value="{{ $user->first_name }}">
+                                            <input type="text" class="form-control" name="first_name" value="{{ $user->first_name }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Last Name</label>
-                                            <input type="text" class="form-control" value="{{ $user->last_name }}">
+                                            <input type="text" class="form-control" name="last_name" value="{{ $user->last_name }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">{{ __('Username') }}</label>
+                                            <input type="text" class="form-control" name="username" value="{{ $user->username }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">{{ __('Email*') }}</label>
+                                            <input type="text" class="form-control" name="email" value="{{ $user->email }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">{{ __('Job Description') }}</label>
+                                            <input type="text" class="form-control" name="job_desc" value="{{ $user->job_desc }}">
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Roles</label>
+                                            <br>
                                             <br>
                                             @foreach($roles as $id => $name)
                                                 <label>

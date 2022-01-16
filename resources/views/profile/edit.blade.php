@@ -38,7 +38,7 @@
                 <div class="row">
                   <div class="col-md-12 mb-3">
                     <div class="form-group">
-                      <label class="bmd-label-floating">Organisation (disabled)</label>
+                      <label class="bmd-label-floating">Organisation</label>
                     <input type="text" class="form-control" value="{{ $user['organisation'] ?? ''  }}" disabled>
                     </div>
                   </div>
