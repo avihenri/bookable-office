@@ -79,6 +79,10 @@
     font-size: 1rem !important;
   }
 
+  .font-size-2rem {
+    font-size: 2rem !important;
+  }
+
   .size-120-percent {
     font-size: 120% !important;
   }

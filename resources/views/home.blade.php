@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <a href="javascript:void(0)" class="btn btn-info btn-round btn-sm font-600 font-size-1rem" id="submit-organisation" style="float:right;">
-                                            <span class="material-icons-outlined">Save</span> 
+                                            <span class="material-icons-outlined">Save</span>
                                             <div class="ripple-container"></div>
                                         </a>
                                     </div>
@@ -57,13 +57,13 @@
                                         <form method="POST" action="/organisation/{{  $organisation->id }}" id="update-organisation-name">
                                             @csrf
                                             @method('put')
-                                            <input type="text" name="name" class="form-control pt-2" value="{{ $organisation->name }}"> 
+                                            <input type="text" name="name" class="form-control pt-2" value="{{ $organisation->name }}">
                                             <a href="javascript:void(0)" class="btn btn-info btn-round btn-sm font-600 font-size-1rem" id="save-name" style="float:right;">
-                                                <span class="material-icons-outlined">Save</span> 
+                                                <span class="material-icons-outlined">Save</span>
                                                 <div class="ripple-container"></div>
                                             </a>
                                             <a href="javascript:void(0)" class="btn btn-danger btn-round btn-sm font-600 font-size-1rem" id="cancel-name" style="float:right;">
-                                                <span class="material-icons-outlined">Cancel</span> 
+                                                <span class="material-icons-outlined">Cancel</span>
                                             </a>
                                         </form>
                                     </div>
@@ -82,11 +82,11 @@
                                             @method('put')
                                             <textarea class="form-control pt-2" rows="5" name="bio" id="bio-field" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'>{{  $organisation->bio }}</textarea>
                                             <a href="javascript:void(0)" class="btn btn-info btn-round btn-sm font-600 font-size-1rem" id="save-bio" style="float:right;">
-                                                <span class="material-icons-outlined">Save</span> 
+                                                <span class="material-icons-outlined">Save</span>
                                                 <div class="ripple-container"></div>
                                             </a>
                                             <a href="javascript:void(0)" class="btn btn-danger btn-round btn-sm font-600 font-size-1rem" id="cancel-bio" style="float:right;">
-                                                <span class="material-icons-outlined">Cancel</span> 
+                                                <span class="material-icons-outlined">Cancel</span>
                                             </a>
                                         </form>
                                     </div>
@@ -115,7 +115,7 @@
                                     <td>Room 1</td>
                                     <td>
                                         <a href="#" class="btn btn-info btn-round btn-sm font-600 font-size-1rem" style="float:right;">
-                                            <span class="material-icons-outlined">Book</span> 
+                                            <span class="material-icons-outlined">Book</span>
                                             <div class="ripple-container"></div>
                                         </a>
                                     </td>
@@ -140,7 +140,7 @@
                                     <td>Board Room</td>
                                     <td>
                                         <a href="#" class="btn btn-info btn-round btn-sm font-600 font-size-1rem" style="float:right;">
-                                            <span class="material-icons-outlined">Book</span> 
+                                            <span class="material-icons-outlined">Book</span>
                                             <div class="ripple-container"></div>
                                         </a>
                                     </td>

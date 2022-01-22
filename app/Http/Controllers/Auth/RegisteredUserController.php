@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Organisation;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -34,25 +37,45 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'organisation_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $transaction = DB::transaction(function() use ($request) {
+            // create organsisation
+            $organisation = Organisation::create([
+                'name' => $request->organisation_name,
+                'bio' => $request->bio ?? '',
+            ]);
 
-        event(new Registered($user));
+            // create user
+            $user = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        Auth::login($user);
+            // give user admin rights
+            $adminRole = Role::where('name', 'ADMIN')->first();
+            $user->roles()->attach($adminRole->id);
 
-        return redirect(RouteServiceProvider::HOME);
+            // associate organisation with user
+            $user->organisation()->associate($organisation);
+            $user->save();
+
+            event(new Registered($user));
+            Auth::login($user);
+
+            return true;
+        });
+
+        return $transaction ? redirect(RouteServiceProvider::HOME)
+            : redirect()->back()->with('error', 'Registration failed.');
     }
 }

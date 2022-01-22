@@ -14,10 +14,25 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
+
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Organisation Name*</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control  mt-2" name="organisation_name" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label">Organisation Bio</label>
+                            <div class="col-md-12">
+                                <textarea class="form-control  mt-2" name="bio"></textarea>
+                            </div>
+                        </div>
+
+
                         <div class="form-group row">
                             <label for="first_name" class="col-md-4 col-form-label">{{ __('First Name*') }}</label>
                             <div class="col-md-12">
-                                <input id="name" type="text" class="form-control mt-2 @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+                                <input id="first_name" type="text" class="form-control mt-2 @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
                                 @error('first_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -77,9 +92,9 @@
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label">{{ __('Confirm Password*') }}</label>
                             <div class="col-md-12">
-                                <input id="password-confirm" type="password" class="form-control mt-2" name="password_confirmation" required autocomplete="new-password">                            </div>
+                                <input id="password-confirm" type="password" class="form-control mt-2" name="password_confirmation" required autocomplete="new-password">
+                            </div>
                         </div>
-
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12 text-center">

@@ -11,28 +11,29 @@
                 <div class="card-body light-grey">
                     <div class="row">
                         {{-- INFO --}}
-                        <div class="col-md-6 mb-4 white-text text-center text-md-left">
-                            <h1 class="display-4 font-weight-bold">Your Office Booking Solution</h1>
+                        <div class="col-md-6 mb-4 white-text text-center text-md-left mt-5">
+                            <h1 class="display-4 font-weight-bold text-center mt-3">Your Office Booking Solution</h1>
                             <hr class="hr-light">
-                
-                            <p><strong>
-                                Do you have an office with hot desks? <br />
-                                Do you have meeting rooms? <br />
-                                <br />
-                                Do you use a spreadsheet to book these??
-                            </strong></p>
-      
+
+                            <p class="font-size-2rem text-center mb-4"><strong><span class="material-icons">table_restaurant</span> Book a desk </strong></p>
+                            <p class="font-size-2rem text-center mb-4"><strong><span class="material-icons">devices</span> Book a device </strong></p>
+                            <p class="font-size-2rem text-center mb-4"><strong><span class="material-icons">
+                                meeting_room
+                                </span> Book a meeting room</strong></p>
+
+                            <p class="font-size-2rem mt-5 text-center"><strong><a href="#" class="btn btn-primary">About Bookable Office</a></strong></p>
+
                         </div>
 
                         {{-- REGISTER / LOGIN --}}
                         <div class="col-md-6 col-xl-5 mb-4">
                             <div class="card">
                                 <div class="card-body light-grey">
-                                    <h3 class="dark-grey-text text-center"><strong>Create an Account</strong></h3>
+                                    <h3 class="dark-grey-text text-center"><strong>Register a New Organisation</strong></h3>
                                     <div class="row mt-4 mb-4">
                                         <div class="col-md-12 text-center">
                                             <a href="/register" class="btn btn-info btn-round font-600 font-size-1rem">
-                                                <span>REGISTER</span> 
+                                                <span>REGISTER</span>
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </div>
@@ -42,11 +43,16 @@
                                     <div class="row mt-4 mb-4">
                                         <div class="col-md-12 text-center">
                                             <a href="/login" class="btn btn-info btn-round font-600 font-size-1rem">
-                                                <span>Login</span> 
+                                                <span>Login</span>
                                                 <div class="ripple-container"></div>
                                             </a>
                                         </div>
                                     </div>
+
+                                    <h6 class="text-center">Not got an account but your organisation uses this app?
+                                        <br>
+                                        You will need to ask your organisation to add you as a user.
+                                    </h6>
                                 </div>
                             </div>
                         </div>
