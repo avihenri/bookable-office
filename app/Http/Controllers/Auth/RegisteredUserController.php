@@ -62,7 +62,7 @@ class RegisteredUserController extends Controller
             ]);
 
             // give user admin rights
-            $adminRole = Role::where('name', 'ADMIN')->first();
+            $adminRole = Role::where('identifier', 'SUPER_ADMIN')->first();
             $user->roles()->attach($adminRole->id);
 
             // associate organisation with user

@@ -26,7 +26,7 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
                                           <label class="bmd-label-floating">Organisation</label>
-                                        <input type="text" class="form-control" value="{{ $adminUser['organisation']  }}" disabled>
+                                        <input type="text" class="form-control" value="{{ $user->organisation->name  }}" disabled>
                                         </div>
                                       </div>
 

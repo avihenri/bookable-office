@@ -20,7 +20,8 @@
             </a>
         </li>
 
-        @if (auth()->check() && auth()->user()->hasRole(1)) {{-- TODO: Get role id with a const --}}
+
+        @if (auth()->check() && auth()->user()->userHasRoleByIdentifier(User::SUPER_ADMIN))
             <div class="nav-divider">
             <h5 class="nav-divider-heading">  ADMIN</h5>
             </div>

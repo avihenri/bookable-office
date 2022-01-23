@@ -16,6 +16,8 @@ class User extends Authenticatable
 
     protected $with = ['organisation'];
 
+    const SUPER_ADMIN = 'SUPER_ADMIN';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -54,5 +56,15 @@ class User extends Authenticatable
 
     public function organisation() {
         return $this->belongsTo(Organisation::class);
+    }
+
+    public function userHasRoleByIdentifier($identifier) {
+        $user = auth()->user();
+        foreach ($user->roles as $role) {
+            if ($role->identifier == $identifier) {
+                return true;
+            }
+        }
+        return false;
     }
 }
