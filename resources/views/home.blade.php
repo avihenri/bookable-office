@@ -12,62 +12,37 @@
                 <div class="card">
                     <div class="card-header card-header-primary">
                         <h4 class="card-title uppercase text-white" style="display: inline-block">
-                            @if (is_null($organisation))
-                                Create Your Organisation
-                            @else
                                 Your Organisation
-                            @endif
                         </h4>
                     </div>
                     <div class="card-body">
-                        @if (is_null($organisation))
-                            <form method="POST" action="/organisation" id="add-organisation">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">Name</label>
-                                            <input type="text" class="form-control" name="name" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">Bio</label>
-                                            <textarea class="form-control" rows="5" name="bio"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <a href="javascript:void(0)" class="btn btn-info btn-round btn-sm font-600 font-size-1rem" id="submit-organisation" style="float:right;">
-                                            <span class="material-icons-outlined">Save</span>
-                                            <div class="ripple-container"></div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </form>
-                        @else
-                            <div class="row">
-                                <div class="col-md-12 mb-4">
-                                    <h3 class="card-title text-white" id="organisation-name">
-                                        {{ $organisation->name }}
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <h3 class="card-title text-white" id="organisation-name">
+                                    {{ $organisation->name }}
+                                    @if (auth()->check() && auth()->user()->userHasRoleByIdentifier(User::SUPER_ADMIN))
                                         <a href="#" class="text-info font-600 font-size-1rem inline-block" id="edit-name">
                                             <span class="material-icons">edit</span>
                                         </a>
-                                    </h3>
-                                    <div class="form-group display-none" id="name-form-wrapper">
-                                        <form method="POST" action="/organisation/{{  $organisation->id }}" id="update-organisation-name">
-                                            @csrf
-                                            @method('put')
-                                            <input type="text" name="name" class="form-control pt-2" value="{{ $organisation->name }}">
-                                            <a href="javascript:void(0)" class="btn btn-info btn-round btn-sm font-600 font-size-1rem" id="save-name" style="float:right;">
-                                                <span class="material-icons-outlined">Save</span>
-                                                <div class="ripple-container"></div>
-                                            </a>
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-round btn-sm font-600 font-size-1rem" id="cancel-name" style="float:right;">
-                                                <span class="material-icons-outlined">Cancel</span>
-                                            </a>
-                                        </form>
-                                    </div>
+                                    @endif
+                                </h3>
+                                <div class="form-group display-none" id="name-form-wrapper">
+                                    <form method="POST" action="/organisation/{{  $organisation->id }}" id="update-organisation-name">
+                                        @csrf
+                                        @method('put')
+                                        <input type="text" name="name" class="form-control pt-2" value="{{ $organisation->name }}">
+                                        <a href="javascript:void(0)" class="btn btn-info btn-round btn-sm font-600 font-size-1rem" id="save-name" style="float:right;">
+                                            <span class="material-icons-outlined">Save</span>
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-round btn-sm font-600 font-size-1rem" id="cancel-name" style="float:right;">
+                                            <span class="material-icons-outlined">Cancel</span>
+                                        </a>
+                                    </form>
                                 </div>
+                            </div>
+                            @if (auth()->user()->userHasRoleByIdentifier(User::SUPER_ADMIN) ||
+                                (!auth()->user()->userHasRoleByIdentifier(User::SUPER_ADMIN) && $organisation->bio))
                                 <div class="col-md-12">
                                     <div>
                                         <label class="size-120-percent inline-block">Bio</label>
@@ -91,9 +66,9 @@
                                         </form>
                                     </div>
                                 </div>
-                                <hr>
-                            </div>
-                        @endif
+                            @endif
+                            <hr>
+                        </div>
                     </div>
                 </div>
             </div>
