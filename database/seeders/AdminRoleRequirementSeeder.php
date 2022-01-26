@@ -18,7 +18,8 @@ class AdminRoleRequirementSeeder extends Seeder
         // create super admin role
         $role = Role::create([
             'name' => 'Super Admin',
-            'identifier' => 'SUPER_ADMIN'
+            'identifier' => 'SUPER_ADMIN',
+            'guard_name' => 'web',
         ]);
 
         // add all permissions role

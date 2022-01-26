@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
@@ -61,13 +62,13 @@ class RegisteredUserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            // give user admin rights
-            $adminRole = Role::where('identifier', 'SUPER_ADMIN')->first();
-            $user->roles()->attach($adminRole->id);
-
             // associate organisation with user
             $user->organisation()->associate($organisation);
             $user->save();
+
+            // give user admin rights
+            $adminRole = Role::where('identifier', 'SUPER_ADMIN')->first();
+            $user->roles()->attach($adminRole->id);
 
             event(new Registered($user));
             Auth::login($user);

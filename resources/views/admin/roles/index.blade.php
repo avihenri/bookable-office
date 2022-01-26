@@ -12,12 +12,12 @@
                     <div class="card">
                         <div class="card-header card-header-primary">
                            <div class="pull-left">
-                                <h4 class="card-title uppercase">User Role Management</h4>
+                                <h4 class="card-title uppercase">User Roles</h4>
                            </div>
                             <div class="pull-right">
-                                @can('can-create')
+                                {{-- @can('can-create')
                                     <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem" href="{{ route('roles.create') }}">Create</a>
-                                @endcan
+                                @endcan --}}
                             </div>
                         </div>
                         <div class="card-body table-responsive">
@@ -31,14 +31,14 @@
                                         <tr>
                                             <td>{{ $role->name }}</td>
                                             <td class="pull-right">
-                                                @can('can-edit')
-                                                    <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem" href="{{ route('roles.edit',$role->id) }}">Edit</a>
-                                                @endcan
-                                                @can('can-delete')
+                                                {{-- @can('can-edit') --}}
+                                                    <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem" href="{{ route('roles.edit',$role->id) }}">View</a>
+                                                {{-- @endcan --}}
+                                                {{-- @can('can-delete')
                                                     {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
                                                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-round btn-sm font-600 font-size-1rem']) !!}
                                                     {!! Form::close() !!}
-                                                @endcan
+                                                @endcan --}}
                                             </td>
                                         </tr>
                                     @endforeach

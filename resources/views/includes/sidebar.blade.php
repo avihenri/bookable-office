@@ -37,12 +37,12 @@
                 <p>Roles</p>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="/permissions">
                 <i class="material-icons">flaky</i>
                 <p>Permissions</p>
                 </a>
-          </li>
+          </li> --}}
         @endif
       </ul>
 

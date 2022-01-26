@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth']], function() {
     // USER/ROLE
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-    Route::resource('permissions', PermissionController::class);
+    // Route::resource('permissions', PermissionController::class);
 
     // HOME PAGE
     Route::get('/home', [HomeController::class, 'index'])->name('home');

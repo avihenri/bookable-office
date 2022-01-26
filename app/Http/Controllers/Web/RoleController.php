@@ -42,8 +42,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permission = Permission::get();
-        return view('admin.roles.create',compact('permission'));
+        // $permission = Permission::get();
+        // return view('admin.roles.create',compact('permission'));
     }
 
     /**
@@ -54,15 +54,15 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:roles,name',
-            'permission' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required|unique:roles,name',
+        //     'permission' => 'required',
+        // ]);
 
-        $role = Role::create(['name' => $request->input('name')]);
-        $role->syncPermissions($request->input('permission'));
+        // $role = Role::create(['name' => $request->input('name')]);
+        // $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('roles.index')->with('success','Created successfully');
+        // return redirect()->route('roles.index')->with('success','Created successfully');
     }
     /**
      * Display the specified resource.
@@ -106,18 +106,18 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'permission' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'permission' => 'required',
+        // ]);
 
-        $role = Role::find($id);
-        $role->name = $request->input('name');
-        $role->save();
+        // $role = Role::find($id);
+        // $role->name = $request->input('name');
+        // $role->save();
 
-        $role->syncPermissions($request->input('permission'));
+        // $role->syncPermissions($request->input('permission'));
 
-        return redirect()->back()->with('success', 'Updated successfully');
+        // return redirect()->back()->with('success', 'Updated successfully');
     }
     /**
      * Remove the specified resource from storage.
@@ -127,13 +127,13 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $model_has_roles = DB::table("model_has_roles")->pluck('role_id')->all();
+        // $model_has_roles = DB::table("model_has_roles")->pluck('role_id')->all();
 
-        if (in_array($id, $model_has_roles)) {
-            return redirect()->back()->withErrors(['error' => 'Unable to delete. Role being used.']);
-        }
+        // if (in_array($id, $model_has_roles)) {
+        //     return redirect()->back()->withErrors(['error' => 'Unable to delete. Role being used.']);
+        // }
 
-        DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('roles.index')->with('success', 'Deleted successfully');
+        // DB::table("roles")->where('id',$id)->delete();
+        // return redirect()->route('roles.index')->with('success', 'Deleted successfully');
     }
 }

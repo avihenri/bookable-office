@@ -29,9 +29,9 @@ class PermissionController extends Controller
      */
     public function index(Request $request)
     {
-        $permissions = Permission::orderBy('name','asc')->paginate(5);
-        return view('admin.permissions.index',compact('permissions'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        // $permissions = Permission::orderBy('name','asc')->paginate(5);
+        // return view('admin.permissions.index',compact('permissions'))
+        //     ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -41,7 +41,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('admin.permissions.create');
+        // return view('admin.permissions.create');
     }
 
     /**
@@ -52,13 +52,13 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:permissions,name',
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required|unique:permissions,name',
+        // ]);
 
-        Permission::create(['name' => $request->input('name')]);
+        // Permission::create(['name' => $request->input('name')]);
 
-        return redirect()->route('permissions.index')->with('success', 'Created successfully');
+        // return redirect()->route('permissions.index')->with('success', 'Created successfully');
     }
 
     /**
@@ -80,9 +80,9 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        $permission = Permission::find($id);
+        // $permission = Permission::find($id);
 
-        return view('admin.permissions.edit', compact('permission'));
+        // return view('admin.permissions.edit', compact('permission'));
     }
 
     /**
@@ -94,15 +94,15 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required',
+        // ]);
 
-        $permission = Permission::find($id);
-        $permission->name = $request->input('name');
-        $permission->save();
+        // $permission = Permission::find($id);
+        // $permission->name = $request->input('name');
+        // $permission->save();
 
-        return redirect()->back()->with('success', 'Updated successfully');
+        // return redirect()->back()->with('success', 'Updated successfully');
     }
 
     /**
@@ -113,14 +113,14 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        $role_has_permissions = DB::table("role_has_permissions")->pluck('permission_id')->all();
+        // $role_has_permissions = DB::table("role_has_permissions")->pluck('permission_id')->all();
 
-        if (in_array($id, $role_has_permissions)) {
-            return redirect()->back()->withErrors(['error' => 'Unable to delete. Permission attached to a role.']);
-        }
+        // if (in_array($id, $role_has_permissions)) {
+        //     return redirect()->back()->withErrors(['error' => 'Unable to delete. Permission attached to a role.']);
+        // }
 
-        DB::table("permissions")->where('id',$id)->delete();
+        // DB::table("permissions")->where('id',$id)->delete();
 
-        return redirect()->route('permissions.index')->with('success', 'Deleted successfully');
+        // return redirect()->route('permissions.index')->with('success', 'Deleted successfully');
     }
 }

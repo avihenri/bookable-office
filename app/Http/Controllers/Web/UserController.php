@@ -35,7 +35,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::orderBy('first_name','ASC')->get();
+        $users = User::where('organisation_id', auth()->user()->organisation_id)->orderBy('first_name','ASC')->get();
         return view('admin.users.index', compact('users'));
     }
 
@@ -47,10 +47,6 @@ class UserController extends Controller
     public function create()
     {
         $user = auth()->user();
-        if (!$user->userHasRoleByIdentifier(User::SUPER_ADMIN)) {
-            abort(403);
-        }
-
         $roles = Role::pluck('name', 'id')->all();
 
         return view('admin.users.create', compact('roles', 'user'));
@@ -65,10 +61,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if (!auth()->user()->userHasRoleByIdentifier(User::SUPER_ADMIN)) {
-            abort(403);
-        }
-
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
@@ -112,10 +104,6 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        if (!auth()->user()->userHasRoleByIdentifier(User::SUPER_ADMIN)) {
-            abort(403);
-        }
-
         $user = User::find($id);
         $roles = Role::pluck('name', 'id')->all();
         $userRoles = $user->roles->pluck('name','name')->all();
@@ -132,10 +120,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!auth()->user()->userHasRoleByIdentifier(User::SUPER_ADMIN)) {
-            abort(403);
-        }
-
         $user = User::find($id);
 
         $request->validate([
@@ -162,10 +146,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if (!auth()->user()->userHasRoleByIdentifier(User::SUPER_ADMIN)) {
-            abort(403);
-        }
-
         User::find($id)->delete();
         return redirect()->route('users.index')->with('success','Deleted successfully');
     }

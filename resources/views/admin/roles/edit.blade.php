@@ -27,7 +27,7 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Name</label>
-                                            <input type="text" class="form-control" value="{{ $role->name }}">
+                                            <input type="text" class="form-control" value="{{ $role->name }}" disabled>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb-3">
@@ -37,16 +37,16 @@
                                             <br>
                                             @foreach($permission as $id => $name)
                                                 <label>
-                                                    <input class="name" name="permission[]" type="checkbox" value="{{ $id }}" {{ in_array($id, $rolePermissions) ? 'checked' : '' }}>
+                                                    <input class="name" name="permission[]" type="checkbox" value="{{ $id }}" {{ in_array($id, $rolePermissions) ? 'checked' : '' }} disabled>
                                                     {{ $name }}
                                                 </label>
                                                 <br/>
                                             @endforeach
                                         </div>
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    {{-- <div class="col-md-12 mb-3">
                                         <button type="submit" class="btn btn-info pull-right font-600 font-size-1rem">Update</button>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                             </form>
