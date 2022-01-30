@@ -109,4 +109,28 @@ class OrganisationController extends Controller
     {
         //
     }
+
+    /**
+     * Upload profile image.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadLogoImage(Request $request, Organisation $organisation)
+    {
+        $request->validate([
+            'logo_path' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:3048',
+        ]);
+
+        // File details & save
+        $file = $request['logo_path'];
+        $fileName = $file->getClientOriginalName();
+        $file->storeAs('public/organisation-logo', $fileName);
+
+        // save image path on user
+        $organisation->logoPath = "/storage/organisation-logo/" . $fileName;
+        $organisation->save();
+
+        return redirect()->back()->with('success', 'Logo added successfully');
+    }
 }

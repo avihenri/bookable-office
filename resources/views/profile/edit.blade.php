@@ -185,7 +185,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary font-600 font-size-1rem" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-info font-600 font-size-1rem" id="upload-image">Add</button>
+            <button type="button" class="btn btn-info font-600 font-size-1rem white" id="upload-image">Add</button>
           </div>
         </form>
       </div>

@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     // ORGANISATION
     Route::resource('/organisation', OrganisationController::class);
+    Route::post('/organisation/{organisation}/upload-logo', [OrganisationController::class, 'uploadLogoImage']);
 });
 
 

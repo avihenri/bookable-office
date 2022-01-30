@@ -9,15 +9,18 @@
                 @include('includes.session-success')
             </div>
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header card-header-primary">
-                        <h4 class="card-title uppercase text-white" style="display: inline-block">
-                                Your Organisation
-                        </h4>
-                    </div>
+                <div class="card card-organisation">
+
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-12 mb-4">
+                            <div class="col-md-4 mb-4">
+                                <div class="card-logo">
+                                    <a href="#" id="add-logo" data-toggle="modal" data-target="#add-logo-modal">
+                                        <img class="img" id="organisation-logo" src="{{ !$organisation['logoPath'] ? '/img/plusIcon.png' : $organisation['logoPath'] }}" width="300" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-8 mb-4">
                                 <h3 class="card-title text-white" id="organisation-name">
                                     {{ $organisation->name }}
                                     @if (auth()->check() && auth()->user()->loggedInUserHasRoleByIdentifier(User::SUPER_ADMIN))
@@ -40,10 +43,10 @@
                                         </a>
                                     </form>
                                 </div>
-                            </div>
+                            {{-- </div> --}}
                             @if (auth()->user()->loggedInUserHasRoleByIdentifier(User::SUPER_ADMIN) ||
                                 (!auth()->user()->loggedInUserHasRoleByIdentifier(User::SUPER_ADMIN) && $organisation->bio))
-                                <div class="col-md-12">
+                                {{-- <div class="col-md-8"> --}}
                                     <div>
                                         <label class="size-120-percent inline-block">Bio</label>
                                         <a href="#" class="text-info font-600 font-size-1rem inline-block" id="edit-bio">
@@ -130,11 +133,40 @@
 
      </div>
 </div>
+
+  {{-- UPLOAD NEW LOGO IMAGE MODAL --}}
+  <div class="modal" id="add-logo-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form method="POST" action="/organisation/{{ $organisation->id }}/upload-logo" id="upload-logo-form" enctype="multipart/form-data">
+          @csrf
+          <div class="modal-header">
+            <h5 class="modal-title">Upload New Logo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <input type="file" id="logo" name="logo_path">
+          </div>
+          <div class="modal-footer">
+            <a href="javascript:void(0)" class="btn btn-secondary font-600 font-size-1rem" data-dismiss="modal">Close</a>
+            <a href="javascript:void(0)" class="btn btn-info font-600 font-size-1rem white" id="upload-logo">Add</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 @endsection
 
 @section('scripts')
     <script type="text/javascript">
         $(document).ready(function() {
+            // submit upload logo
+            $('#upload-logo').on('click', () => {
+                $('#upload-logo-form').submit();
+            });
+
             // submit add organisation
             $('#submit-organisation-bio, #update-organisation-name').on('click', () => {
                 $('#add-organisation').submit();
