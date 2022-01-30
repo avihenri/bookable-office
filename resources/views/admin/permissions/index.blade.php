@@ -34,11 +34,6 @@
                                                 {{-- @can('role-edit') --}}
                                                     <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem" href="{{ route('permissions.edit',$permission->id) }}">Edit</a>
                                                 {{-- @endcan --}}
-                                                {{-- @can('role-delete') --}}
-                                                    {!! Form::open(['method' => 'DELETE','route' => ['permissions.destroy', $permission->id],'style'=>'display:inline']) !!}
-                                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-round btn-sm font-600 font-size-1rem']) !!}
-                                                    {!! Form::close() !!}
-                                                {{-- @endcan --}}
                                             </td>
                                         </tr>
                                     @endforeach

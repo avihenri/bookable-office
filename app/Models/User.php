@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -58,7 +59,10 @@ class User extends Authenticatable
         return $this->belongsTo(Organisation::class);
     }
 
-    public function userHasRoleByIdentifier($identifier) {
+    /**
+     * Get user role by identifier
+     */
+    public function loggedInUserHasRoleByIdentifier($identifier) {
         $user = auth()->user();
         foreach ($user->roles as $role) {
             if ($role->identifier == $identifier) {
@@ -66,5 +70,22 @@ class User extends Authenticatable
             }
         }
         return false;
+    }
+
+    /**
+     * User is super admin
+     */
+    public function userIsSuperAdmin() {
+        $superAdminRole = Role::where('identifier', self::SUPER_ADMIN)->first();
+        return $this->hasRole($superAdminRole->id);
+    }
+
+    /**
+     * RETURN ALL SUPER ADMINS
+     */
+    public static function allSuperAdmins() {
+        return User::whereHas("roles", function($q){
+            $q->where("identifier", self::SUPER_ADMIN);
+        })->get();
     }
 }

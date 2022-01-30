@@ -146,7 +146,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('users.index')->with('success','Deleted successfully');
+        $user = User::find($id);
+        if ($user->userIsSuperAdmin() && count(User::allSuperAdmins()) < 2) {
+            return redirect()->route('users.index')->with('error', 'You must have at least one Super Admin.');
+        }
+
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'Deleted successfully');
     }
 }

@@ -20,7 +20,7 @@
                             <div class="col-md-12 mb-4">
                                 <h3 class="card-title text-white" id="organisation-name">
                                     {{ $organisation->name }}
-                                    @if (auth()->check() && auth()->user()->userHasRoleByIdentifier(User::SUPER_ADMIN))
+                                    @if (auth()->check() && auth()->user()->loggedInUserHasRoleByIdentifier(User::SUPER_ADMIN))
                                         <a href="#" class="text-info font-600 font-size-1rem inline-block" id="edit-name">
                                             <span class="material-icons">edit</span>
                                         </a>
@@ -41,8 +41,8 @@
                                     </form>
                                 </div>
                             </div>
-                            @if (auth()->user()->userHasRoleByIdentifier(User::SUPER_ADMIN) ||
-                                (!auth()->user()->userHasRoleByIdentifier(User::SUPER_ADMIN) && $organisation->bio))
+                            @if (auth()->user()->loggedInUserHasRoleByIdentifier(User::SUPER_ADMIN) ||
+                                (!auth()->user()->loggedInUserHasRoleByIdentifier(User::SUPER_ADMIN) && $organisation->bio))
                                 <div class="col-md-12">
                                     <div>
                                         <label class="size-120-percent inline-block">Bio</label>

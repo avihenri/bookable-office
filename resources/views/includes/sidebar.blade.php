@@ -21,7 +21,7 @@
         </li>
 
 
-        @if (auth()->check() && auth()->user()->userHasRoleByIdentifier(User::SUPER_ADMIN))
+        @if (auth()->check() && auth()->user()->loggedInUserHasRoleByIdentifier(User::SUPER_ADMIN))
             <div class="nav-divider">
             <h5 class="nav-divider-heading">  ADMIN</h5>
             </div>
