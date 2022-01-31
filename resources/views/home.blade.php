@@ -77,7 +77,7 @@
             </div>
         </div>
 
-        @if (!is_null($organisation))
+        @if ($offices)
             <div class="row">
                 {{-- BOOK DESK --}}
                 <div class="col-md-6">
@@ -88,16 +88,18 @@
                         <div class="card-body table-responsive">
                             <table class="table table-hover font-size-1rem text-white">
                                 <tbody>
-                                    <tr>
-                                    <td>Scone Street</td>
-                                    <td>Room 1</td>
-                                    <td>
-                                        <a href="#" class="btn btn-info btn-round btn-sm font-600 font-size-1rem" style="float:right;">
-                                            <span class="material-icons-outlined">Book</span>
-                                            <div class="ripple-container"></div>
-                                        </a>
-                                    </td>
-                                    </tr>
+                                    @foreach ($offices as $office)
+                                        <tr>
+                                            <td>{{ $office['name'] }}</td>
+                                            <td>Room 1</td>
+                                            <td>
+                                                <a href="#" class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" style="float:right;">
+                                                    <span class="material-icons-outlined">Book</span>
+                                                    <div class="ripple-container"></div>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -113,16 +115,18 @@
                         <div class="card-body table-responsive">
                             <table class="table table-hover font-size-1rem">
                                 <tbody>
-                                    <tr>
-                                    <td>Scone Street</td>
-                                    <td>Board Room</td>
-                                    <td>
-                                        <a href="#" class="btn btn-info btn-round btn-sm font-600 font-size-1rem" style="float:right;">
-                                            <span class="material-icons-outlined">Book</span>
-                                            <div class="ripple-container"></div>
-                                        </a>
-                                    </td>
-                                    </tr>
+                                    @foreach ($offices as $office)
+                                        <tr>
+                                            <td>{{ $office['name'] }}</td>
+                                            <td>Board Room</td>
+                                            <td>
+                                                <a href="#" class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" style="float:right;">
+                                                    <span class="material-icons-outlined">Book</span>
+                                                    <div class="ripple-container"></div>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

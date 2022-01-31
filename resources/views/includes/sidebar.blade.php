@@ -14,7 +14,7 @@
           </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/users">
+            <a class="nav-link" href="/offices">
                 <i class="material-icons">group</i>
                 <p>Office Management</p>
             </a>

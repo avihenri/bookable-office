@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Organisation;
+use App\Http\Resources\Offices;
 
 use App\Http\Resources\Organisations;
 
@@ -31,7 +32,8 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $organisation =  Organisation::where('id', $user->organisation_id)->first();
+        $offices = Offices::collection($organisation->offices)->resolve(); //TODO: rooms
 
-        return view('home', compact('organisation'));
+        return view('home', compact('organisation', 'offices'));
     }
 }

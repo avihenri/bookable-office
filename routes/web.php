@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\ProfileController;
 use App\Http\Controllers\Web\OrganisationController;
+use App\Http\Controllers\Web\OfficeController;
 use App\Http\Controllers\Web\RoleController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\PermissionController;
@@ -42,6 +43,9 @@ Route::group(['middleware' => ['auth']], function() {
     // ORGANISATION
     Route::resource('/organisation', OrganisationController::class);
     Route::post('/organisation/{organisation}/upload-logo', [OrganisationController::class, 'uploadLogoImage']);
+
+    // Offices
+    Route::resource('/offices', OfficeController::class);
 });
 
 

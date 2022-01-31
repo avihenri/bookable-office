@@ -21,11 +21,11 @@ class Offices extends JsonResource
             'desc' => $this->desc,
             'address' => $this->address,
             'city' => $this->city,
-            'country_id' => $this->country_id, 
+            'country_id' => $this->country_id,
             'post_code' => $this->post_code,
-            'building_type' => $this->building_type,
-            'office_type' => $this->office_type,
-            'accessibility' => $this->accessibility,
+            'building_type' => $this->building_type ?? '',
+            'office_type' => $this->office_type ?? '',
+            'accessibility' => $this->accessibility ?? '',
             'created_at' => $this->created_at,
             'created_by' => $this->created_by, // update with user resource
         ];

@@ -11,4 +11,8 @@ class Organisation extends Model
 
     protected $fillable = ['name', 'bio', 'logoPath', 'created_by'];
 
+    public function offices() {
+        return $this->hasMany(Office::class);
+    }
+
 }
