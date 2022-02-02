@@ -57,6 +57,7 @@ class OfficeController extends Controller
             'country_id' => $request->country_id,
             'post_code' => strtoupper($request->post_code),
             'organisation_id' => auth()->user()->organisation_id,
+            'created_by' => auth()->user()->id,
         ]);
 
         return redirect()->route('offices.edit', ['office' => $office->id])->with('success', 'Created successfully');
