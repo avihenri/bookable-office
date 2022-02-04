@@ -17,7 +17,7 @@ class CreateRoomsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('office_id');
             $table->string('name', 100)->default('');
-            $table->string('type', 100)->default(''); // open planned, meeting, quite..
+            $table->string('type', 100)->default(''); // main, meeting, quiet..
             $table->integer('max_capacity')->default(0);
             $table->bigInteger('created_by')->nullable();
             $table->timestamps();

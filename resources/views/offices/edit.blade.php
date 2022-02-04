@@ -15,6 +15,7 @@
                                 <h4 class="card-title uppercase">Edit Office</h4>
                            </div>
                             <div class="pull-right">
+                                <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" href="{{ route('rooms.create', ['office' => $office]) }}">Add Room</a>
                                 <a class="btn btn-secondary btn-round btn-sm font-600 font-size-1rem" href="{{ route('offices.index') }}">Back</a>
                             </div>
                         </div>
@@ -54,11 +55,11 @@
                                         <input type="text" class="form-control" name="city" value="{{ $office->city }}" required>
                                       </div>
                                     </div>
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-6 mb-3">
                                       <div class="form-group">
                                         <label class="bmd-label-floating">Country</label>
                                         <select class="form-control" name="country_id" id="country_id">
-                                            <option class="dark-font" value="">--Select--</option>
+                                            <option class="dark" value="">--Select--</option>
                                             @foreach ($countries as $key => $country)
                                                 <option class="dark-font" value="{{ $key }}" {{ $office->country_id === $key ? 'selected' : '' }}>{{ $country }}</option>
                                             @endforeach
@@ -101,6 +102,46 @@
                         </div>
                     </div>
                 </div>
+                {{-- ROOMS --}}
+                @if ($office->rooms()->exists())
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                            <div class="pull-left">
+                                    <h4 class="card-title uppercase">Rooms</h4>
+                            </div>
+                            <div class="pull-right"></div>
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover font-size-1rem">
+                                    <thead>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th></th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($office->rooms as $room)
+                                            <tr>
+                                                <td>{{ $room->name }}</td>
+                                                <td>{{ ucwords(strtolower(str_replace('_', ' ',  $room->type))) }}</td>
+                                                <td class="pull-right">
+                                                    <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" href="{{ route('rooms.edit', ['room' => $room->id, 'office' => $office->id]) }}">
+                                                        <span class="material-icons">edit</span>
+                                                    </a>
+                                                    {!! Form::open(['method' => 'DELETE','route' => ['rooms.destroy', $room->id],'style'=>'display:inline', 'id' => 'delete-room-'.$room->id]) !!}
+                                                        <a href="javascript:void(0)" class="btn btn-danger btn-round btn-sm font-600 font-size-1rem delete-btn" data-toggle="modal" data-target="#delete-room-modal" data-roomid="{{ $room->id }}">
+                                                            <span class="material-icons"> delete</span>
+                                                        </a>
+                                                    {!! Form::close() !!}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
