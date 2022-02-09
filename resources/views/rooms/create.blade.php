@@ -41,9 +41,10 @@
                                         <label class="bmd-label-floating">Type</label>
                                         <select class="form-control" name="type" id="type">
                                             <option class="dark" value="">--Select--</option>
+                                            <option class="dark" value="BOARD_ROOM">Board Room</option>
                                             <option class="dark" value="MAIN_OFFICE">Main Office</option>
-                                            <option class="dark" value="MEETING">Meeting Room</option>
-                                            <option class="dark" value="QUIET">Quiet Room</option>
+                                            <option class="dark" value="MEETING_ROOM">Meeting Room</option>
+                                            <option class="dark" value="QUIET_ROOM">Quiet Room</option>
                                         </select>
                                       </div>
                                     </div>

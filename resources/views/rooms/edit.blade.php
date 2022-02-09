@@ -41,9 +41,10 @@
                                       <div class="form-group">
                                         <label class="bmd-label-floating">Type</label>
                                         <select class="form-control" name="type" id="type">
+                                            <option class="dark" value="BOARD_ROOM" {{ $room->type == 'BOARD_ROOM' ? 'selected' : '' }}>Board Room</option>
                                             <option class="dark" value="MAIN_OFFICE" {{ $room->type == 'MAIN_OFFICE' ? 'selected' : '' }}>Main Office</option>
-                                            <option class="dark" value="MEETING" {{ $room->type == 'MEETING' ? 'selected' : '' }}>Meeting Room</option>
-                                            <option class="dark" value="QUIET" {{ $room->type == 'QUIET' ? 'selected' : '' }}>Quiet Room</option>
+                                            <option class="dark" value="MEETING" {{ $room->type == 'MEETING_ROOM' ? 'selected' : '' }}>Meeting Room</option>
+                                            <option class="dark" value="QUIET" {{ $room->type == 'QUIET_ROOM' ? 'selected' : '' }}>Quiet Room</option>
                                         </select>
                                       </div>
                                     </div>

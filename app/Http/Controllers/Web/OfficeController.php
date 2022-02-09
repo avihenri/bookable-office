@@ -122,7 +122,10 @@ class OfficeController extends Controller
      */
     public function destroy(Office $office)
     {
-        // TODO: check if there are rooms
+        if ($office->rooms) {
+            return redirect()->back()->withErrors(['error' => 'Unable to delete. Room(s) attached.']);
+        }
+
         $office->delete();
         return redirect()->route('offices.index')->with('success', 'Deleted successfully');
     }

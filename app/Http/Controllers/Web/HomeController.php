@@ -32,7 +32,7 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $organisation =  Organisation::where('id', $user->organisation_id)->first();
-        $offices = Offices::collection($organisation->offices)->resolve(); //TODO: rooms
+        $offices = Offices::collection($organisation->offices)->resolve();
 
         return view('home', compact('organisation', 'offices'));
     }

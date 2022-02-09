@@ -80,25 +80,36 @@
         @if ($offices)
             <div class="row">
                 {{-- BOOK DESK --}}
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title uppercase">Book a Desk</h4>
+                            <h4 class="card-title uppercase center-text">MAKE BOOKING</h4>
                         </div>
                         <div class="card-body table-responsive">
                             <table class="table table-hover font-size-1rem text-white">
+                                <thead>
+                                    <th>OFFICE</th>
+                                    <th>ROOM</th>
+                                    <th>ROOM TYPE</th>
+                                    <th></th>
+                                </thead>
                                 <tbody>
                                     @foreach ($offices as $office)
-                                        <tr>
-                                            <td>{{ $office['name'] }}</td>
-                                            <td>Room 1</td>
-                                            <td>
-                                                <a href="#" class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" style="float:right;">
-                                                    <span class="material-icons-outlined">Book</span>
-                                                    <div class="ripple-container"></div>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        @foreach ($office['rooms'] as $room)
+                                            {{-- @if ($room['type'] !== 'Meeting') --}}
+                                                <tr>
+                                                    <td>{{ $office['name'] }}</td>
+                                                    <td>{{ $room['name'] }}</td>
+                                                    <td>{{ $room['type'] }}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" style="float:right;">
+                                                            <span class="material-icons-outlined">Book</span>
+                                                            <div class="ripple-container"></div>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            {{-- @endif --}}
+                                        @endforeach
                                     @endforeach
                                 </tbody>
                             </table>
@@ -107,7 +118,7 @@
                 </div>
 
                 {{-- BOOK MEETING ROOM --}}
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="card">
                         <div class="card-header card-header-primary">
                             <h4 class="card-title uppercase">Book a Meeting Room</h4>
@@ -131,7 +142,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         @endif
 

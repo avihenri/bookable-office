@@ -117,6 +117,8 @@
                                     <thead>
                                         <th>Name</th>
                                         <th>Type</th>
+                                        <th>Capacity</th>
+                                        <th>Desks</th>
                                         <th></th>
                                     </thead>
                                     <tbody>
@@ -124,13 +126,15 @@
                                             <tr>
                                                 <td>{{ $room->name }}</td>
                                                 <td>{{ ucwords(strtolower(str_replace('_', ' ',  $room->type))) }}</td>
+                                                <td>{{ $room->max_capacity ?? '' }}</td>
+                                                <td></td>
                                                 <td class="pull-right">
                                                     <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" href="{{ route('rooms.edit', ['room' => $room->id, 'office' => $office->id]) }}">
                                                         <span class="material-icons">edit</span>
                                                     </a>
                                                     {!! Form::open(['method' => 'DELETE','route' => ['rooms.destroy', $room->id],'style'=>'display:inline', 'id' => 'delete-room-'.$room->id]) !!}
-                                                        <a href="javascript:void(0)" class="btn btn-danger btn-round btn-sm font-600 font-size-1rem delete-btn" data-toggle="modal" data-target="#delete-room-modal" data-roomid="{{ $room->id }}">
-                                                            <span class="material-icons"> delete</span>
+                                                        <a href="javascript:void(0)" class="btn btn-danger btn-round btn-sm font-600 font-size-1rem delete-btn" data-toggle="modal" data-target="#delete-modal" data-deleteditem="room" data-itemid="{{ $room->id }}">
+                                                            <span class="material-icons">delete</span>
                                                         </a>
                                                     {!! Form::close() !!}
                                                 </td>
@@ -145,4 +149,34 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="delete-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Are you sure you want to delete?</h5>
+              </div>
+              <div class="modal-footer">
+                    <a href="javascript:void(0)" class="btn btn-secondary font-600 font-size-1rem" data-dismiss="modal">Cancel</a>
+                    <a href="javascript:void(0)" class="btn btn-info font-600 font-size-1rem white" id="delete-modal-submit" data-deleteditem="" data-itemid="">Continue</a>
+              </div>
+          </div>
+        </div>
+      </div>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('.delete-btn').on('click', function() {
+                $('#delete-modal-submit').data('itemid', $(this).data('itemid'));
+                $('#delete-modal-submit').data('deleteditem', $(this).data('deleteditem'));
+            });
+
+           $('#delete-modal-submit').on('click', function() {
+                $(`#delete-${$(this).data('deleteditem')}-${$(this).data('itemid')}`).submit();
+           });
+        });
+    </script>
 @endsection

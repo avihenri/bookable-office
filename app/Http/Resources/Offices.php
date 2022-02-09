@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Rooms;
 
 class Offices extends JsonResource
 {
@@ -26,6 +27,7 @@ class Offices extends JsonResource
             'building_type' => $this->building_type ?? '',
             'office_type' => $this->office_type ?? '',
             'accessibility' => $this->accessibility ?? '',
+            'rooms' => Rooms::collection($this->rooms)->resolve(),
             'created_at' => $this->created_at,
             'created_by' => $this->created_by, // update with user resource
         ];
