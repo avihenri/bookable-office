@@ -5,19 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class Desk extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'office_id',
+        'room_id',
+        'number',
         'name',
+        'length_cm',
         'type',
-        'max_capacity',
-        'created_by',
+        'created_by'
     ];
-
-    public function desks() {
-        return $this->hasMany(Desk::class);
-    }
 }

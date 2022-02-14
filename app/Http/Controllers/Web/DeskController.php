@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Models\Office;
 use Illuminate\Http\Request;
 use App\Models\Room;
+use App\Models\Desk;
 
-class RoomController extends Controller
+
+class DeskController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
     }
@@ -26,8 +27,8 @@ class RoomController extends Controller
      */
     public function create(Request $request)
     {
-        $office = Office::find($request->office);
-        return view('rooms.create', compact('office'));
+        $room = Room::find($request->room);
+        return view('desks.create', compact('room'));
     }
 
     /**
@@ -41,20 +42,22 @@ class RoomController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'type' => ['required', 'string', 'max:255'],
-            'office_id' => ['required', 'integer'],
+            'number' => ['required', 'integer'],
+            'room_id' => ['required', 'integer'],
         ]);
 
-        $room = Room::create([
+        $desk = Desk::create([
             'name' => $request->name,
-            'office_id' => $request->office_id,
             'type' => $request->type,
-            'max_capacity' => $request->max_capacity,
+            'number' => $request->number,
+            'room_id' => $request->room_id,
+            'length_cm' => $request->length_cm ?? 0,
             'created_by' => auth()->user()->id,
         ]);
 
-        $office = Office::find($request->office_id);
+        $room = Room::find($request->room_id);
 
-        return redirect()->route('rooms.edit', ['room' => $room->id, 'office' => $office->id])->with('success', 'Created successfully');
+        return redirect()->route('desks.edit', ['desk' => $desk->id, 'room' => $room->id])->with('success', 'Created successfully');
     }
 
     /**
@@ -63,7 +66,7 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Room $room)
+    public function show($id)
     {
         //
     }
@@ -74,10 +77,10 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Room $room, Request $request)
+    public function edit(Desk $desk, Request $request)
     {
-        $office = Office::find($request->office);
-        return view('rooms.edit', compact('room', 'office'));
+        $room = Room::find($request->room);
+        return view('desks.edit', compact('room'));
     }
 
     /**
@@ -87,21 +90,21 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Room $room)
+    public function update(Request $request, Desk $desk)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'type' => ['required', 'string', 'max:255'],
-            'office_id' => ['required', 'integer'],
+            'number' => ['required', 'integer'],
+            'room_id' => ['required', 'integer'],
         ]);
 
         $formFields = $request->all();
-        $formFields['max_capacity'] = $formFields['max_capacity'] ?? 0;
+        $formFields['length_cm'] = $formFields['length_cm'] ?? 0;
 
-        $room->update($formFields);
+        $desk->update($formFields);
 
         return redirect()->back()->with('success', 'Updated successfully');
-
     }
 
     /**
@@ -110,13 +113,11 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Room $room)
+    public function destroy(Desk $desk)
     {
-        if ($room->desks) {
-            return redirect()->back()->withErrors(['error' => 'Unable to delete. Desk(s) attached.']);
-        }
-
-        $room->delete();
+        // TODO: check if there are contents
+        $desk->delete();
         return redirect()->back()->with('success', 'Deleted successfully');
+
     }
 }

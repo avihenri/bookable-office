@@ -12,10 +12,12 @@
                     <div class="card">
                         <div class="card-header card-header-primary">
                            <div class="pull-left">
-                                <h4 class="card-title uppercase">Edit Office</h4>
+                                <h4 class="card-title uppercase">
+                                    <span class="material-icons">apartment</span>
+                                    Edit Office
+                                </h4>
                            </div>
                             <div class="pull-right">
-                                <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" href="{{ route('rooms.create', ['office' => $office]) }}">Add Room</a>
                                 <a class="btn btn-secondary btn-round btn-sm font-600 font-size-1rem" href="{{ route('offices.index') }}">Back</a>
                             </div>
                         </div>
@@ -103,16 +105,21 @@
                     </div>
                 </div>
                 {{-- ROOMS --}}
-                @if ($office->rooms()->exists())
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header card-header-primary">
-                            <div class="pull-left">
-                                    <h4 class="card-title uppercase">Rooms</h4>
-                            </div>
-                            <div class="pull-right"></div>
-                            </div>
-                            <div class="card-body table-responsive">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                        <div class="pull-left">
+                            <h4 class="card-title uppercase">
+                                <span class="material-icons">meeting_room</span>
+                                Rooms
+                            </h4>
+                        </div>
+                        <div class="pull-right">
+                            <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" href="{{ route('rooms.create', ['office' => $office]) }}">Add Room</a>
+                        </div>
+                        </div>
+                        <div class="card-body table-responsive">
+                            @if ($office->rooms()->exists())
                                 <table class="table table-hover font-size-1rem">
                                     <thead>
                                         <th>Name</th>
@@ -142,10 +149,12 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                            </div>
+                            @else
+                                <p>No rooms yet.</p>
+                            @endif
                         </div>
                     </div>
-                @endif
+                </div>
             </div>
         </div>
     </div>

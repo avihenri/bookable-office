@@ -47,10 +47,16 @@ Route::group(['middleware' => ['auth']], function() {
 
     // Offices
     Route::resource('/offices', OfficeController::class);
+
     // Rooms
     Route::resource('/rooms', RoomController::class);
     Route::get('/rooms/{office}', [RoomController::class, 'create']);
     Route::get('/rooms/{room}/edit/{office}', [RoomController::class, 'edit']);
+
+    // Desks
+    Route::resource('/desks', RoomController::class);
+    Route::get('/desks/{room}', [RoomController::class, 'create']);
+    Route::get('/desks/{desk}/edit/{room}', [RoomController::class, 'edit']);
 });
 
 

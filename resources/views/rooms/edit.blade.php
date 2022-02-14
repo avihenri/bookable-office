@@ -12,7 +12,10 @@
                     <div class="card">
                         <div class="card-header card-header-primary">
                            <div class="pull-left">
-                                <h4 class="card-title uppercase">Edit Room</h4>
+                                <h4 class="card-title uppercase">
+                                    <span class="material-icons">meeting_room</span>
+                                    Edit Room
+                                </h4>
                            </div>
                             <div class="pull-right">
                                 <a class="btn btn-secondary btn-round btn-sm font-600 font-size-1rem" href="{{ route('offices.edit', ['office' => $office->id]) }}">Back</a>
@@ -59,6 +62,55 @@
                                     <button type="submit" class="btn btn-info pull-right font-600 font-size-1rem white">Save</button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                        <div class="pull-left">
+                            <h4 class="card-title uppercase">
+                                <span class="material-icons">table_bar</span>
+                                Desks
+                            </h4>
+                        </div>
+                        <div class="pull-right">
+                            <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" href="{{ route('desks.create', ['room' => $room]) }}">Add Desk</a>
+                        </div>
+                        </div>
+                        <div class="card-body table-responsive">
+                            @if ($room->desks()->exists())
+                            <table class="table table-hover font-size-1rem">
+                                <thead>
+                                    <th>Number</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($room->desks as $desk)
+                                        <tr>
+                                            <td>{{ $desk->number }}</td>
+                                            <td>{{ $desk->name }}</td>
+                                            <td>{{ ucwords(strtolower(str_replace('_', ' ',  $desk->type))) }}</td>
+                                            <td class="pull-right">
+                                                <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" href="{{ route('desks.edit', ['desk' => $desk->id, 'room' => $room->id]) }}">
+                                                    <span class="material-icons">edit</span>
+                                                </a>
+                                                {!! Form::open(['method' => 'DELETE','route' => ['desks.destroy', $desk->id],'style'=>'display:inline', 'id' => 'delete-desk-'.$desk->id]) !!}
+                                                    <a href="javascript:void(0)" class="btn btn-danger btn-round btn-sm font-600 font-size-1rem delete-btn" data-toggle="modal" data-target="#delete-modal" data-deleteditem="desk" data-itemid="{{ $desk->id }}">
+                                                        <span class="material-icons">delete</span>
+                                                    </a>
+                                                {!! Form::close() !!}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            @else
+                            <p>No desks yet.</p>
+                            @endif
                         </div>
                     </div>
                 </div>

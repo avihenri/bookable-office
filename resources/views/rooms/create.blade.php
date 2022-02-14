@@ -12,7 +12,10 @@
                     <div class="card">
                         <div class="card-header card-header-primary">
                            <div class="pull-left">
-                                <h4 class="card-title uppercase">Add Room</h4>
+                                <h4 class="card-title uppercase">
+                                    <span class="material-icons">meeting_room</span>
+                                    Add Room
+                                </h4>
                            </div>
                             <div class="pull-right">
                                 <a class="btn btn-secondary btn-round btn-sm font-600 font-size-1rem" href="{{ route('offices.edit', ['office' => $office->id]) }}">Back</a>
