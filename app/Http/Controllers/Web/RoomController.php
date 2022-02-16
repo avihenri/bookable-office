@@ -76,7 +76,7 @@ class RoomController extends Controller
      */
     public function edit(Room $room, Request $request)
     {
-        $office = Office::find($request->office);
+        $office = $room->office;
         return view('rooms.edit', compact('room', 'office'));
     }
 

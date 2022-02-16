@@ -23,6 +23,10 @@ class Office extends Model
         'created_by'
     ];
 
+    public function organisation() {
+        return $this->belongsTo(Organisation::class);
+    }
+
     public function rooms() {
         return $this->hasMany(Room::class);
     }

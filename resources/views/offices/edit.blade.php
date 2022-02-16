@@ -136,7 +136,7 @@
                                                 <td>{{ $room->max_capacity ?? '' }}</td>
                                                 <td></td>
                                                 <td class="pull-right">
-                                                    <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" href="{{ route('rooms.edit', ['room' => $room->id, 'office' => $office->id]) }}">
+                                                    <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" href="{{ route('rooms.edit', ['room' => $room->id]) }}">
                                                         <span class="material-icons">edit</span>
                                                     </a>
                                                     {!! Form::open(['method' => 'DELETE','route' => ['rooms.destroy', $room->id],'style'=>'display:inline', 'id' => 'delete-room-'.$room->id]) !!}

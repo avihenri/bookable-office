@@ -17,7 +17,13 @@ class Room extends Model
         'created_by',
     ];
 
+
+    public function office() {
+        return $this->belongsTo(Office::class);
+    }
+
     public function desks() {
         return $this->hasMany(Desk::class);
     }
+
 }
