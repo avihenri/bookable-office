@@ -17,4 +17,8 @@ class Desk extends Model
         'type',
         'created_by'
     ];
+
+    public function room() {
+        return $this->belongsTo(Room::class);
+    }
 }

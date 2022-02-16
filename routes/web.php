@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\ProfileController;
 use App\Http\Controllers\Web\OrganisationController;
 use App\Http\Controllers\Web\OfficeController;
 use App\Http\Controllers\Web\RoomController;
+use App\Http\Controllers\Web\DeskController;
 use App\Http\Controllers\Web\RoleController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\PermissionController;
@@ -51,12 +52,10 @@ Route::group(['middleware' => ['auth']], function() {
     // Rooms
     Route::resource('/rooms', RoomController::class);
     Route::get('/rooms/{office}', [RoomController::class, 'create']);
-    Route::get('/rooms/{room}/edit/{office}', [RoomController::class, 'edit']);
 
     // Desks
-    Route::resource('/desks', RoomController::class);
-    Route::get('/desks/{room}', [RoomController::class, 'create']);
-    Route::get('/desks/{desk}/edit/{room}', [RoomController::class, 'edit']);
+    Route::resource('/desks', DeskController::class);
+    Route::get('/desks/{room}', [DeskController::class, 'create']);
 });
 
 

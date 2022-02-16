@@ -54,7 +54,7 @@ class RoomController extends Controller
 
         $office = Office::find($request->office_id);
 
-        return redirect()->route('rooms.edit', ['room' => $room->id, 'office' => $office->id])->with('success', 'Created successfully');
+        return redirect()->route('rooms.edit', ['room' => $room->id])->with('success', 'Created successfully');
     }
 
     /**

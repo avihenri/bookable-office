@@ -39,8 +39,18 @@ class DeskController extends Controller
      */
     public function store(Request $request)
     {
+        // check number/name for room already exist
+        $room = Room::findOrFail($request->room_id);
+        if (Desk::where('room_id', $request->room_id)
+            ->where('name', $request->name)
+            ->where('number', $request->number)
+            ->exists()) {
+                return redirect()->back()
+                    ->withErrors(['error' => 'A desk already exists with that name and number for room '.$room->name]);
+        }
+
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255',],
             'type' => ['required', 'string', 'max:255'],
             'number' => ['required', 'integer'],
             'room_id' => ['required', 'integer'],
@@ -51,13 +61,11 @@ class DeskController extends Controller
             'type' => $request->type,
             'number' => $request->number,
             'room_id' => $request->room_id,
-            'length_cm' => $request->length_cm ?? 0,
+            'length_cm' => (int)$request->length_cm ?? 0,
             'created_by' => auth()->user()->id,
         ]);
 
-        $room = Room::find($request->room_id);
-
-        return redirect()->route('desks.edit', ['desk' => $desk->id, 'room' => $room->id])->with('success', 'Created successfully');
+        return redirect()->route('desks.edit', ['desk' => $desk->id])->with('success', 'Created successfully');
     }
 
     /**
@@ -79,8 +87,8 @@ class DeskController extends Controller
      */
     public function edit(Desk $desk, Request $request)
     {
-        $room = Room::find($request->room);
-        return view('desks.edit', compact('room'));
+        $room = $desk->room;
+        return view('desks.edit', compact('desk', 'room'));
     }
 
     /**
