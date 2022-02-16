@@ -35,7 +35,7 @@
                                                     <span class="material-icons">edit</span>
                                                 </a>
                                                 {!! Form::open(['method' => 'DELETE','route' => ['offices.destroy', $office->id],'style'=>'display:inline', 'id' => 'delete-office-'.$office->id]) !!}
-                                                    <a href="javascript:void(0)" class="btn btn-danger btn-round btn-sm font-600 font-size-1rem delete-btn" data-toggle="modal" data-target="#delete-office-modal" data-officeid="{{ $office->id }}">
+                                                    <a href="javascript:void(0)" class="btn btn-danger btn-round btn-sm font-600 font-size-1rem delete-btn" data-toggle="modal" data-target="#delete-modal" data-deleteditem="office" data-itemid="{{ $office->id }}">
                                                         <span class="material-icons"> delete</span>
                                                     </a>
                                                 {!! Form::close() !!}
@@ -51,32 +51,6 @@
         </div>
     </div>
 
-    <div class="modal" id="delete-office-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Are you sure you want to delete?</h5>
-              </div>
-              <div class="modal-footer">
-                    <a href="javascript:void(0)" class="btn btn-secondary font-600 font-size-1rem" data-dismiss="modal">Cancel</a>
-                    <a href="javascript:void(0)" class="btn btn-info font-600 font-size-1rem white" id="delete-modal-submit" data-officeid="">Continue</a>
-              </div>
-          </div>
-        </div>
-      </div>
+    <x-modals.delete/>
 @endsection
 
-@section('scripts')
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-            $('.delete-btn').on('click', function() {
-                $('#delete-modal-submit').data('officeid', $(this).data('officeid'));
-            });
-
-           $('#delete-modal-submit').on('click', function() {
-                $(`#delete-office-${$(this).data('officeid')}`).submit();
-           });
-        });
-    </script>
-@endsection

@@ -41,12 +41,12 @@
   <div class="wrapper">
     {{-- SIDEBAR --}}
     {{-- @if (isset($options['has-sidebar']) && $options['has-sidebar']) --}}
-      @include('includes.sidebar')  
+      @include('includes.sidebar')
     {{-- @endif --}}
 
     <div class="main-panel">
       {{-- NAVBAR --}}
-      @include('includes.navbar') 
+      @include('includes.navbar')
 
       {{-- CONTENT --}}
       <div class="content">
@@ -90,12 +90,11 @@
   <script src="/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="/js/material-dashboard.js?v=2.1.0"></script>
-  
+
   @yield('scripts')
 
   <script>
     $(document).ready(function() {
-      $().ready(function() {
         // ADD RED * TO REQUIRED SELECT/INPUT FIELDS
         $('select[required], input[required], textarea[required]').parent().find('label').append('<span class="red">*</span>');
         $sidebar = $('.sidebar');
@@ -106,6 +105,16 @@
                 $('.fade-out-alert').remove();
             });
         }, 2000);
+
+        // delete modal {
+        $('.delete-btn').on('click', function() {
+            $('#delete-modal-submit').data('itemid', $(this).data('itemid'));
+            $('#delete-modal-submit').data('deleteditem', $(this).data('deleteditem'));
+        });
+
+        $('#delete-modal-submit').on('click', function() {
+            $(`#delete-${$(this).data('deleteditem')}-${$(this).data('itemid')}`).submit();
+        });
 
         $sidebar_img_container = $sidebar.find('.sidebar-background');
 
@@ -261,7 +270,6 @@
           }, 1000);
 
         });
-      });
     });
   </script>
 </body>
