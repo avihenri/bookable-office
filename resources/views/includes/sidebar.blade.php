@@ -19,6 +19,12 @@
                 <p>Office Management</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/contents">
+                <i class="material-icons">phonelink</i>
+                <p>Contents Management</p>
+            </a>
+        </li>
 
 
         @if (auth()->check() && auth()->user()->loggedInUserHasRoleByIdentifier(User::SUPER_ADMIN))

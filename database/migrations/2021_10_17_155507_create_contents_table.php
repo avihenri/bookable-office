@@ -15,12 +15,12 @@ class CreateContentsTable extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 100);
-            $table->bigInteger('desk_id');
+            $table->string('item', 100);
+            $table->string('type', 100);
             $table->bigInteger('organisation_id');
-            $table->string('item', 255)->default('');
-            $table->string('location_desc', 255)->default(''); // extra desc of location
-            $table->bigInteger('created_by')->nullable();
+            $table->string('desc', 255)->nullable();
+            $table->string('location_desc', 255)->nullable(); // extra desc of location
+            $table->bigInteger('created_by');
             $table->timestamps();
         });
     }
