@@ -62,6 +62,22 @@
                                         </select>
                                       </div>
                                     </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Contents</label>
+                                            <br>
+                                            <br>
+                                            @foreach($allContents as $content)
+                                                <label>
+                                                    <input class="name" name="contents[]" type="checkbox" value="{{ $content['id'] }}"
+                                                    {{ in_array($content['id'], $deskContentIds) ? 'checked' : '' }}
+                                                    >
+                                                    {{ $content['item'] }}
+                                                </label>
+                                                <br/>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <button type="submit" class="btn btn-info pull-right font-600 font-size-1rem white">Save</button>

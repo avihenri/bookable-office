@@ -24,7 +24,7 @@ class Content extends Model
         return $this->belongsTo(Organisation::class);
     }
 
-    public function desk() {
+    public function desks() {
         $this->belongsToMany(Desk::class);
     }
 

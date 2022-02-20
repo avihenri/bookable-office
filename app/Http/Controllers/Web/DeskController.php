@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Contents;
+use App\Models\Content;
 use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\Desk;
@@ -28,7 +30,12 @@ class DeskController extends Controller
     public function create(Request $request)
     {
         $room = Room::find($request->room);
-        return view('desks.create', compact('room'));
+        $contents = Contents::collection(
+            Content::where('organisation_id', $room->office->organisation->id)
+            ->get()
+        )->resolve();
+
+        return view('desks.create', compact('room', 'contents'));
     }
 
     /**
@@ -65,6 +72,9 @@ class DeskController extends Controller
             'created_by' => auth()->user()->id,
         ]);
 
+        // attach contents to desk
+        $desk->contents()->attach($request->contents);
+
         return redirect()->route('desks.edit', ['desk' => $desk->id])->with('success', 'Created successfully');
     }
 
@@ -87,8 +97,15 @@ class DeskController extends Controller
      */
     public function edit(Desk $desk, Request $request)
     {
+        $desk->load('contents');
         $room = $desk->room;
-        return view('desks.edit', compact('desk', 'room'));
+        $allContents = Contents::collection(
+            Content::where('organisation_id', $room->office->organisation->id)
+            ->get()
+        )->resolve();
+        $deskContentIds = $desk->contents()->get()->pluck('id')->toArray();
+
+        return view('desks.edit', compact('desk', 'room', 'allContents', 'deskContentIds'));
     }
 
     /**
@@ -111,6 +128,7 @@ class DeskController extends Controller
         $formFields['length_cm'] = $formFields['length_cm'] ?? 0;
 
         $desk->update($formFields);
+        $desk->contents()->sync($request->contents);
 
         return redirect()->back()->with('success', 'Updated successfully');
     }
@@ -123,7 +141,9 @@ class DeskController extends Controller
      */
     public function destroy(Desk $desk)
     {
-        // TODO: check if there are contents
+        // TODO: check has bookings
+        $deskContentIds = $desk->contents()->get()->pluck('id')->toArray();
+        $desk->contents()->detach($deskContentIds);
         $desk->delete();
         return redirect()->back()->with('success', 'Deleted successfully');
 

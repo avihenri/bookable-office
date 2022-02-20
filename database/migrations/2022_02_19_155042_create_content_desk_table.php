@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeskContentTable extends Migration
+class CreateContentDeskTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDeskContentTable extends Migration
      */
     public function up()
     {
-        Schema::create('desk_content', function (Blueprint $table) {
+        Schema::create('content_desk', function (Blueprint $table) {
             $table->unsignedBigInteger('desk_id');
             $table->unsignedBigInteger('content_id');
         });
@@ -26,6 +26,6 @@ class CreateDeskContentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('desk_content');
+        Schema::dropIfExists('content_desk');
     }
 }

@@ -21,4 +21,8 @@ class Desk extends Model
     public function room() {
         return $this->belongsTo(Room::class);
     }
+
+    public function contents() {
+        return $this->belongsToMany(Content::class);
+    }
 }
