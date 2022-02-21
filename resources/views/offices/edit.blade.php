@@ -134,7 +134,7 @@
                                                 <td>{{ $room->name }}</td>
                                                 <td>{{ ucwords(strtolower(str_replace('_', ' ',  $room->type))) }}</td>
                                                 <td>{{ $room->max_capacity ?? '' }}</td>
-                                                <td></td>
+                                                <td>{{ $room->desks ? count($room->desks) : 0 }}</td>
                                                 <td class="pull-right">
                                                     <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" href="{{ route('rooms.edit', ['room' => $room->id]) }}">
                                                         <span class="material-icons">edit</span>

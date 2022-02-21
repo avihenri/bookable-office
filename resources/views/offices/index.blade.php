@@ -23,13 +23,17 @@
                                 <thead>
                                     <th>Name</th>
                                     <th>Address</th>
-                                    <th></th>
+                                    <th>Desk</th>
+                                    <th>Meeting Rooms</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($offices as $office)
                                         <tr>
                                             <td>{{ $office->name }}</td>
                                             <td>{{ $office->address }}</td>
+                                            <td>{{ $office->desks ? count($office->desks) : 0 }}</td>
+                                            <td>{{ $office->meetingRooms ? count($office->meetingRooms) : 0 }}</td>
+                                            <td></td>
                                             <td class="pull-right">
                                                 <a class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" href="{{ route('offices.edit',$office->id) }}">
                                                     <span class="material-icons">edit</span>

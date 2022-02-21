@@ -20,6 +20,7 @@ class Rooms extends JsonResource
             'name' => $this->name,
             'type' => ucwords(strtolower(str_replace('_', ' ', $this->type))),
             'max_capacity' => $this->max_capacity,
+            'deskCount' => $this->desks ? count($this->desks) : 0,
         ];
     }
 }

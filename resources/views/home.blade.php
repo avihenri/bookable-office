@@ -91,7 +91,7 @@
                                     <th>OFFICE</th>
                                     <th>ROOM</th>
                                     <th>ROOM TYPE</th>
-                                    <th></th>
+                                    <th>DESKS</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($offices as $office)
@@ -101,6 +101,7 @@
                                                     <td>{{ $office['name'] }}</td>
                                                     <td>{{ $room['name'] }}</td>
                                                     <td>{{ $room['type'] }}</td>
+                                                    <td>{{ $room['deskCount'] }}</td>
                                                     <td>
                                                         <a href="#" class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" style="float:right;">
                                                             <span class="material-icons-outlined">Book</span>

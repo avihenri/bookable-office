@@ -16,7 +16,10 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        $offices = Office::where('organisation_id', auth()->user()->organisation_id)->orderBy('name', 'asc')->get();
+        $offices = Office::where('organisation_id', auth()->user()->organisation_id)
+            ->orderBy('name', 'asc')
+            ->get();
+
         return view('offices.index', compact('offices'));
     }
 
