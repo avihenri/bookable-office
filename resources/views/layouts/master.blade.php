@@ -31,10 +31,9 @@
   <link href="/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <link href="/css/custom.css" rel="stylesheet" />
   <script src="/js/core/jquery.min.js"></script>
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  @yield('styles')
 </head>
 
 <body class="dark-edition">
@@ -90,6 +89,9 @@
   <script src="/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="/js/material-dashboard.js?v=2.1.0"></script>
+  <script src="{{asset('js/app.js')}}"></script>
+
+  {{-- <script src="moment.js"></script> --}}
 
   @yield('scripts')
 

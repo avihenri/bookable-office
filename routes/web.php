@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth']], function() {
     // Rooms
     Route::resource('/rooms', RoomController::class);
     Route::get('/rooms/{office}', [RoomController::class, 'create']);
+    Route::get('/rooms/{room}/book/', [RoomController::class, 'book']);
 
     // Desks
     Route::resource('/desks', DeskController::class);

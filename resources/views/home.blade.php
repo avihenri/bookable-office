@@ -103,7 +103,7 @@
                                                     <td>{{ $room['type'] }}</td>
                                                     <td>{{ $room['deskCount'] }}</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" style="float:right;">
+                                                        <a href="/rooms/{{ $room['id'] }}/book" class="btn btn-info btn-round btn-sm font-600 font-size-1rem white" style="float:right;">
                                                             <span class="material-icons-outlined">Book</span>
                                                             <div class="ripple-container"></div>
                                                         </a>

@@ -104,6 +104,33 @@ class RoomController extends Controller
 
     }
 
+     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function book(Room $room, Request $request)
+    {
+        $office = $room->office;
+        return view('rooms.book', compact('room', 'office'));
+    }
+
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function makeBooking(Request $request, Room $room)
+    {
+        // TODO
+
+        return redirect()->back()->with('success', 'Updated successfully');
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *
