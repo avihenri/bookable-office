@@ -21,6 +21,8 @@
         "tailwindcss": "^2.0.2"
     },
     "dependencies": {
+        "@eonasdan/tempus-dominus": "^6.0.0-beta1",
+        "@popperjs/core": "^2.11.2",
         "animate.css": "^4.1.1",
         "moment": "^2.29.1"
     }
