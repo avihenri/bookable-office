@@ -67,6 +67,9 @@ class RegisteredUserController extends Controller
             $user->organisation()->associate($organisation);
             $user->save();
 
+            $organisation->created_by = $user->id;
+            $organisation->save();
+
             // give user admin rights
             $adminRole = Role::where('identifier', 'SUPER_ADMIN')->first();
             $user->roles()->attach($adminRole->id);
