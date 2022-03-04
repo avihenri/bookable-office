@@ -3,8 +3,8 @@ require('./bootstrap');
 import moment from 'moment';
 window.moment = moment;
 
-import tempusDominus from '@eonasdan/tempus-dominus';
-window.tempusDominus = tempusDominus;
+import TempusDominus from '@eonasdan/tempus-dominus';
+window.tempusDominus = TempusDominus;
 
 import popper from '@popperjs/core';
 window.popper = popper;

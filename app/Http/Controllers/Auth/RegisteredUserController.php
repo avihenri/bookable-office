@@ -60,6 +60,7 @@ class RegisteredUserController extends Controller
                 'username' => $request->username,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'bio' => ''
             ]);
 
             // associate organisation with user

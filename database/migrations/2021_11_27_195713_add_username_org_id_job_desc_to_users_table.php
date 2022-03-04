@@ -14,8 +14,8 @@ class AddUsernameOrgIdJobDescToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('name', 'first_name');
-            $table->string('last_name')->after('first_name');
+            $table->renameColumn('name', 'first_name');
+            $table->string('last_name')->after('name');
             $table->string('username')->after('last_name')->unique();
             $table->bigInteger('organisation_id')->after('email')->nullable();
             $table->string('job_desc')->after('organisation_id')->nullable();
