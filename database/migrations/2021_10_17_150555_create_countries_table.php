@@ -16,10 +16,11 @@ class CreateCountriesTable extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 100)->default('');
-            $table->string('m49_code', 3)->default('');
-            $table->string('iso_code', 3)->default('');
-            $table->string('iso3_code', 3)->default('');
-            $table->string('phone_code', 3)->default('');
+            $table->string('nicename', 100)->default('');
+            $table->string('m49_code', 3)->nullable();
+            $table->string('iso_code', 3)->nullable();
+            $table->string('iso3_code', 3)->nullable();
+            $table->string('phone_code', 4)->default('');
             $table->integer('sort_order')->default(0);
             $table->timestamps();
         });
